@@ -8,9 +8,9 @@ using System.Windows.Forms;
 
 namespace Capstone_Project
 {
-    public partial class MainScreen : Form//for calendar use selection range to highlight exhibition dates, also set calendar to disabled
+    public partial class CollectionScreen : Form
     {
-        public MainScreen()
+        public CollectionScreen()
         {
             InitializeComponent();
         }
