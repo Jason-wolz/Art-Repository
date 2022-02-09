@@ -14,5 +14,33 @@ namespace Capstone_Project
         {
             InitializeComponent();
         }
+
+        private void piecesButton_Click(object sender, EventArgs e)
+        {
+            var f = new CollectionScreen();
+            this.Hide();
+            f.Show();
+        }
+
+        private void historyButton_Click(object sender, EventArgs e)
+        {
+            var f = new ExhibitionScreen();
+            this.Hide();
+            f.Show();
+        }
+
+        private void calendarButton_Click(object sender, EventArgs e)
+        {
+            var f = new CalendarScreen();
+            this.Hide();
+            f.Show();
+        }
+
+        private void settingsButton_Click(object sender, EventArgs e)
+        {
+            var f = new SettingsScreen();
+            this.Hide();
+            f.Show();
+        }
     }
 }

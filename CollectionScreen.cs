@@ -14,5 +14,19 @@ namespace Capstone_Project
         {
             InitializeComponent();
         }
+
+        private void backButton_Click(object sender, EventArgs e)
+        {
+            var f = new MainScreen();
+            this.Hide();
+            f.Show();
+        }
+
+        private void singlePieceButton_Click(object sender, EventArgs e)
+        {
+            var f = new SinglePieceScreen();
+            this.Hide();
+            f.Show();
+        }
     }
 }

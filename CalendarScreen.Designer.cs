@@ -1,7 +1,6 @@
-﻿
-namespace Capstone_Project
+﻿namespace Capstone_Project
 {
-    partial class CollectionScreen
+    partial class CalendarScreen
     {
         /// <summary>
         /// Required designer variable.
@@ -30,12 +29,14 @@ namespace Capstone_Project
         private void InitializeComponent()
         {
             this.backButton = new System.Windows.Forms.Button();
-            this.singlePieceButton = new System.Windows.Forms.Button();
+            this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // backButton
             // 
-            this.backButton.Location = new System.Drawing.Point(64, 358);
+            this.backButton.Location = new System.Drawing.Point(681, 362);
             this.backButton.Name = "backButton";
             this.backButton.Size = new System.Drawing.Size(75, 23);
             this.backButton.TabIndex = 0;
@@ -43,25 +44,33 @@ namespace Capstone_Project
             this.backButton.UseVisualStyleBackColor = true;
             this.backButton.Click += new System.EventHandler(this.backButton_Click);
             // 
-            // singlePieceButton
+            // monthCalendar1
             // 
-            this.singlePieceButton.Location = new System.Drawing.Point(197, 358);
-            this.singlePieceButton.Name = "singlePieceButton";
-            this.singlePieceButton.Size = new System.Drawing.Size(75, 23);
-            this.singlePieceButton.TabIndex = 1;
-            this.singlePieceButton.Text = "This Piece";
-            this.singlePieceButton.UseVisualStyleBackColor = true;
-            this.singlePieceButton.Click += new System.EventHandler(this.singlePieceButton_Click);
+            this.monthCalendar1.CalendarDimensions = new System.Drawing.Size(2, 2);
+            this.monthCalendar1.Location = new System.Drawing.Point(18, 29);
+            this.monthCalendar1.Name = "monthCalendar1";
+            this.monthCalendar1.TabIndex = 1;
             // 
-            // CollectionScreen
+            // dataGridView1
+            // 
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(516, 29);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowTemplate.Height = 25;
+            this.dataGridView1.Size = new System.Drawing.Size(240, 309);
+            this.dataGridView1.TabIndex = 2;
+            // 
+            // CalendarScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(436, 450);
-            this.Controls.Add(this.singlePieceButton);
+            this.ClientSize = new System.Drawing.Size(778, 406);
+            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.monthCalendar1);
             this.Controls.Add(this.backButton);
-            this.Name = "CollectionScreen";
-            this.Text = "CollectionScreen";
+            this.Name = "CalendarScreen";
+            this.Text = "CalendarScreen";
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -69,6 +78,7 @@ namespace Capstone_Project
         #endregion
 
         private System.Windows.Forms.Button backButton;
-        private System.Windows.Forms.Button singlePieceButton;
+        private System.Windows.Forms.MonthCalendar monthCalendar1;
+        private System.Windows.Forms.DataGridView dataGridView1;
     }
 }

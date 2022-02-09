@@ -3,21 +3,19 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Capstone_Project
 {
-    public partial class LoginScreen : Form
+    public partial class CalendarScreen : Form
     {
-        public LoginScreen()
+        public CalendarScreen()
         {
             InitializeComponent();
         }
 
-        private void submitButton_Click(object sender, EventArgs e)
+        private void backButton_Click(object sender, EventArgs e)
         {
             var f = new MainScreen();
             this.Hide();

@@ -31,30 +31,31 @@ namespace Capstone_Project
         {
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.framedCheckBox = new System.Windows.Forms.CheckBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.backButton = new System.Windows.Forms.Button();
             this.saveButton = new System.Windows.Forms.Button();
             this.editButton = new System.Windows.Forms.Button();
-            this.textBox7 = new System.Windows.Forms.TextBox();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.notesText = new System.Windows.Forms.TextBox();
+            this.dimensionsText = new System.Windows.Forms.TextBox();
+            this.mediumText = new System.Windows.Forms.TextBox();
+            this.titleText = new System.Windows.Forms.TextBox();
+            this.editionText = new System.Windows.Forms.TextBox();
+            this.soldText = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.dataGridView3 = new System.Windows.Forms.DataGridView();
-            this.checkBox3 = new System.Windows.Forms.CheckBox();
+            this.editionCheckBox = new System.Windows.Forms.CheckBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.soldCheckBox = new System.Windows.Forms.CheckBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox6 = new System.Windows.Forms.PictureBox();
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.dateText = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -86,16 +87,16 @@ namespace Capstone_Project
             this.label2.TabIndex = 1;
             this.label2.Text = "Date";
             // 
-            // checkBox1
+            // framedCheckBox
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(19, 277);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(66, 19);
-            this.checkBox1.TabIndex = 3;
-            this.checkBox1.Text = "Framed";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.CheckBox1_CheckedChanged);
+            this.framedCheckBox.AutoSize = true;
+            this.framedCheckBox.Enabled = false;
+            this.framedCheckBox.Location = new System.Drawing.Point(19, 277);
+            this.framedCheckBox.Name = "framedCheckBox";
+            this.framedCheckBox.Size = new System.Drawing.Size(66, 19);
+            this.framedCheckBox.TabIndex = 3;
+            this.framedCheckBox.Text = "Framed";
+            this.framedCheckBox.UseVisualStyleBackColor = true;
             // 
             // label3
             // 
@@ -125,27 +126,27 @@ namespace Capstone_Project
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.dateText);
+            this.splitContainer1.Panel1.Controls.Add(this.backButton);
             this.splitContainer1.Panel1.Controls.Add(this.saveButton);
             this.splitContainer1.Panel1.Controls.Add(this.editButton);
-            this.splitContainer1.Panel1.Controls.Add(this.textBox7);
-            this.splitContainer1.Panel1.Controls.Add(this.textBox6);
-            this.splitContainer1.Panel1.Controls.Add(this.textBox5);
-            this.splitContainer1.Panel1.Controls.Add(this.textBox4);
-            this.splitContainer1.Panel1.Controls.Add(this.textBox3);
-            this.splitContainer1.Panel1.Controls.Add(this.textBox2);
-            this.splitContainer1.Panel1.Controls.Add(this.textBox1);
+            this.splitContainer1.Panel1.Controls.Add(this.notesText);
+            this.splitContainer1.Panel1.Controls.Add(this.dimensionsText);
+            this.splitContainer1.Panel1.Controls.Add(this.mediumText);
+            this.splitContainer1.Panel1.Controls.Add(this.titleText);
+            this.splitContainer1.Panel1.Controls.Add(this.editionText);
+            this.splitContainer1.Panel1.Controls.Add(this.soldText);
             this.splitContainer1.Panel1.Controls.Add(this.label5);
             this.splitContainer1.Panel1.Controls.Add(this.dataGridView3);
-            this.splitContainer1.Panel1.Controls.Add(this.checkBox3);
+            this.splitContainer1.Panel1.Controls.Add(this.editionCheckBox);
             this.splitContainer1.Panel1.Controls.Add(this.label4);
-            this.splitContainer1.Panel1.Controls.Add(this.checkBox2);
+            this.splitContainer1.Panel1.Controls.Add(this.soldCheckBox);
             this.splitContainer1.Panel1.Controls.Add(this.pictureBox1);
             this.splitContainer1.Panel1.Controls.Add(this.label2);
             this.splitContainer1.Panel1.Controls.Add(this.label6);
             this.splitContainer1.Panel1.Controls.Add(this.label1);
-            this.splitContainer1.Panel1.Controls.Add(this.checkBox1);
+            this.splitContainer1.Panel1.Controls.Add(this.framedCheckBox);
             this.splitContainer1.Panel1.Controls.Add(this.label3);
-            this.splitContainer1.Panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.splitContainer1_Panel1_Paint);
             // 
             // splitContainer1.Panel2
             // 
@@ -157,6 +158,17 @@ namespace Capstone_Project
             this.splitContainer1.Size = new System.Drawing.Size(688, 472);
             this.splitContainer1.SplitterDistance = 308;
             this.splitContainer1.TabIndex = 8;
+            // 
+            // backButton
+            // 
+            this.backButton.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.backButton.Location = new System.Drawing.Point(490, 3);
+            this.backButton.Name = "backButton";
+            this.backButton.Size = new System.Drawing.Size(58, 29);
+            this.backButton.TabIndex = 25;
+            this.backButton.Text = "Back";
+            this.backButton.UseVisualStyleBackColor = true;
+            this.backButton.Click += new System.EventHandler(this.BackButton_Click);
             // 
             // saveButton
             // 
@@ -175,56 +187,55 @@ namespace Capstone_Project
             this.editButton.TabIndex = 23;
             this.editButton.Text = "Edit";
             this.editButton.UseVisualStyleBackColor = true;
-            this.editButton.Click += new System.EventHandler(this.editButton_Click);
+            this.editButton.Click += new System.EventHandler(this.EditButton_Click);
             // 
-            // textBox7
+            // notesText
             // 
-            this.textBox7.Location = new System.Drawing.Point(568, 124);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(100, 23);
-            this.textBox7.TabIndex = 22;
+            this.notesText.Enabled = false;
+            this.notesText.Location = new System.Drawing.Point(568, 124);
+            this.notesText.Name = "notesText";
+            this.notesText.Size = new System.Drawing.Size(100, 23);
+            this.notesText.TabIndex = 22;
             // 
-            // textBox6
+            // dimensionsText
             // 
-            this.textBox6.Location = new System.Drawing.Point(286, 129);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(100, 23);
-            this.textBox6.TabIndex = 21;
+            this.dimensionsText.Enabled = false;
+            this.dimensionsText.Location = new System.Drawing.Point(286, 97);
+            this.dimensionsText.Name = "dimensionsText";
+            this.dimensionsText.Size = new System.Drawing.Size(100, 23);
+            this.dimensionsText.TabIndex = 20;
             // 
-            // textBox5
+            // mediumText
             // 
-            this.textBox5.Location = new System.Drawing.Point(286, 97);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(100, 23);
-            this.textBox5.TabIndex = 20;
+            this.mediumText.Enabled = false;
+            this.mediumText.Location = new System.Drawing.Point(286, 68);
+            this.mediumText.Name = "mediumText";
+            this.mediumText.Size = new System.Drawing.Size(100, 23);
+            this.mediumText.TabIndex = 19;
             // 
-            // textBox4
+            // titleText
             // 
-            this.textBox4.Location = new System.Drawing.Point(286, 68);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(100, 23);
-            this.textBox4.TabIndex = 19;
+            this.titleText.Enabled = false;
+            this.titleText.Location = new System.Drawing.Point(286, 39);
+            this.titleText.Name = "titleText";
+            this.titleText.Size = new System.Drawing.Size(100, 23);
+            this.titleText.TabIndex = 18;
             // 
-            // textBox3
+            // editionText
             // 
-            this.textBox3.Location = new System.Drawing.Point(286, 39);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(100, 23);
-            this.textBox3.TabIndex = 18;
+            this.editionText.Enabled = false;
+            this.editionText.Location = new System.Drawing.Point(568, 87);
+            this.editionText.Name = "editionText";
+            this.editionText.Size = new System.Drawing.Size(100, 23);
+            this.editionText.TabIndex = 17;
             // 
-            // textBox2
+            // soldText
             // 
-            this.textBox2.Location = new System.Drawing.Point(568, 87);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 23);
-            this.textBox2.TabIndex = 17;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(568, 55);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 23);
-            this.textBox1.TabIndex = 16;
+            this.soldText.Enabled = false;
+            this.soldText.Location = new System.Drawing.Point(568, 55);
+            this.soldText.Name = "soldText";
+            this.soldText.Size = new System.Drawing.Size(100, 23);
+            this.soldText.TabIndex = 16;
             // 
             // label5
             // 
@@ -244,15 +255,17 @@ namespace Capstone_Project
             this.dataGridView3.Size = new System.Drawing.Size(450, 94);
             this.dataGridView3.TabIndex = 14;
             // 
-            // checkBox3
+            // editionCheckBox
             // 
-            this.checkBox3.AutoSize = true;
-            this.checkBox3.Location = new System.Drawing.Point(499, 89);
-            this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(63, 19);
-            this.checkBox3.TabIndex = 12;
-            this.checkBox3.Text = "Edition";
-            this.checkBox3.UseVisualStyleBackColor = true;
+            this.editionCheckBox.AutoSize = true;
+            this.editionCheckBox.Enabled = false;
+            this.editionCheckBox.Location = new System.Drawing.Point(499, 89);
+            this.editionCheckBox.Name = "editionCheckBox";
+            this.editionCheckBox.Size = new System.Drawing.Size(63, 19);
+            this.editionCheckBox.TabIndex = 12;
+            this.editionCheckBox.Text = "Edition";
+            this.editionCheckBox.UseVisualStyleBackColor = true;
+            this.editionCheckBox.CheckedChanged += new System.EventHandler(this.EditionCheckBox_CheckedChanged);
             // 
             // label4
             // 
@@ -263,15 +276,17 @@ namespace Capstone_Project
             this.label4.TabIndex = 11;
             this.label4.Text = "Notes ";
             // 
-            // checkBox2
+            // soldCheckBox
             // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(499, 57);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(49, 19);
-            this.checkBox2.TabIndex = 10;
-            this.checkBox2.Text = "Sold";
-            this.checkBox2.UseVisualStyleBackColor = true;
+            this.soldCheckBox.AutoSize = true;
+            this.soldCheckBox.Enabled = false;
+            this.soldCheckBox.Location = new System.Drawing.Point(499, 57);
+            this.soldCheckBox.Name = "soldCheckBox";
+            this.soldCheckBox.Size = new System.Drawing.Size(49, 19);
+            this.soldCheckBox.TabIndex = 10;
+            this.soldCheckBox.Text = "Sold";
+            this.soldCheckBox.UseVisualStyleBackColor = true;
+            this.soldCheckBox.CheckedChanged += new System.EventHandler(this.SoldCheckBox_CheckedChanged);
             // 
             // pictureBox1
             // 
@@ -321,6 +336,14 @@ namespace Capstone_Project
             this.pictureBox2.TabIndex = 0;
             this.pictureBox2.TabStop = false;
             // 
+            // dateText
+            // 
+            this.dateText.Enabled = false;
+            this.dateText.Location = new System.Drawing.Point(286, 129);
+            this.dateText.Name = "dateText";
+            this.dateText.Size = new System.Drawing.Size(100, 23);
+            this.dateText.TabIndex = 26;
+            // 
             // SinglePieceScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -349,29 +372,30 @@ namespace Capstone_Project
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox framedCheckBox;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.CheckBox checkBox2;
+        private System.Windows.Forms.CheckBox soldCheckBox;
         private System.Windows.Forms.PictureBox pictureBox6;
         private System.Windows.Forms.PictureBox pictureBox5;
         private System.Windows.Forms.PictureBox pictureBox4;
         private System.Windows.Forms.PictureBox pictureBox3;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.CheckBox checkBox3;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.CheckBox editionCheckBox;
+        private System.Windows.Forms.TextBox editionText;
+        private System.Windows.Forms.TextBox soldText;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.DataGridView dataGridView3;
         private System.Windows.Forms.Button saveButton;
         private System.Windows.Forms.Button editButton;
-        private System.Windows.Forms.TextBox textBox7;
-        private System.Windows.Forms.TextBox textBox6;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox notesText;
+        private System.Windows.Forms.TextBox dimensionsText;
+        private System.Windows.Forms.TextBox mediumText;
+        private System.Windows.Forms.TextBox titleText;
+        private System.Windows.Forms.Button backButton;
+        private System.Windows.Forms.TextBox dateText;
     }
 }
