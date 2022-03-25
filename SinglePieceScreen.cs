@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using MySql.Data.MySqlClient;
 
 namespace Capstone_Project
 {
@@ -13,6 +14,21 @@ namespace Capstone_Project
         public SinglePieceScreen()
         {
             InitializeComponent();
+            MySql.Data.MySqlClient.MySqlConnection conn;
+            string connString = "server=localhost;user id=root;database=mydb;persistsecurityinfo=True";
+
+            try
+            {
+                conn = new MySql.Data.MySqlClient.MySqlConnection
+                {
+                    ConnectionString = connString
+                };
+                conn.Open();
+            }
+            catch (MySql.Data.MySqlClient.MySqlException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void SaveButton_Click(object sender, EventArgs e)

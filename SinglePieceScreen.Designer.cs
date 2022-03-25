@@ -29,12 +29,14 @@ namespace Capstone_Project
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.framedCheckBox = new System.Windows.Forms.CheckBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.dateText = new System.Windows.Forms.TextBox();
             this.backButton = new System.Windows.Forms.Button();
             this.saveButton = new System.Windows.Forms.Button();
             this.editButton = new System.Windows.Forms.Button();
@@ -55,7 +57,7 @@ namespace Capstone_Project
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.dateText = new System.Windows.Forms.TextBox();
+            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -67,6 +69,7 @@ namespace Capstone_Project
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -158,6 +161,14 @@ namespace Capstone_Project
             this.splitContainer1.Size = new System.Drawing.Size(688, 472);
             this.splitContainer1.SplitterDistance = 308;
             this.splitContainer1.TabIndex = 8;
+            // 
+            // dateText
+            // 
+            this.dateText.Enabled = false;
+            this.dateText.Location = new System.Drawing.Point(286, 129);
+            this.dateText.Name = "dateText";
+            this.dateText.Size = new System.Drawing.Size(100, 23);
+            this.dateText.TabIndex = 26;
             // 
             // backButton
             // 
@@ -336,14 +347,6 @@ namespace Capstone_Project
             this.pictureBox2.TabIndex = 0;
             this.pictureBox2.TabStop = false;
             // 
-            // dateText
-            // 
-            this.dateText.Enabled = false;
-            this.dateText.Location = new System.Drawing.Point(286, 129);
-            this.dateText.Name = "dateText";
-            this.dateText.Size = new System.Drawing.Size(100, 23);
-            this.dateText.TabIndex = 26;
-            // 
             // SinglePieceScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -364,6 +367,7 @@ namespace Capstone_Project
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -397,5 +401,6 @@ namespace Capstone_Project
         private System.Windows.Forms.TextBox titleText;
         private System.Windows.Forms.Button backButton;
         private System.Windows.Forms.TextBox dateText;
+        private System.Windows.Forms.BindingSource bindingSource1;
     }
 }
