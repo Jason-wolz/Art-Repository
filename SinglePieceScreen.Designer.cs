@@ -47,7 +47,7 @@ namespace Capstone_Project
             this.editionText = new System.Windows.Forms.TextBox();
             this.soldText = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.dataGridView3 = new System.Windows.Forms.DataGridView();
+            this.exhibitionHistory = new System.Windows.Forms.DataGridView();
             this.editionCheckBox = new System.Windows.Forms.CheckBox();
             this.label4 = new System.Windows.Forms.Label();
             this.soldCheckBox = new System.Windows.Forms.CheckBox();
@@ -62,7 +62,7 @@ namespace Capstone_Project
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.exhibitionHistory)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
@@ -140,7 +140,7 @@ namespace Capstone_Project
             this.splitContainer1.Panel1.Controls.Add(this.editionText);
             this.splitContainer1.Panel1.Controls.Add(this.soldText);
             this.splitContainer1.Panel1.Controls.Add(this.label5);
-            this.splitContainer1.Panel1.Controls.Add(this.dataGridView3);
+            this.splitContainer1.Panel1.Controls.Add(this.exhibitionHistory);
             this.splitContainer1.Panel1.Controls.Add(this.editionCheckBox);
             this.splitContainer1.Panel1.Controls.Add(this.label4);
             this.splitContainer1.Panel1.Controls.Add(this.soldCheckBox);
@@ -257,14 +257,14 @@ namespace Capstone_Project
             this.label5.TabIndex = 15;
             this.label5.Text = "Exhibition History";
             // 
-            // dataGridView3
+            // exhibitionHistory
             // 
-            this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView3.Location = new System.Drawing.Point(218, 202);
-            this.dataGridView3.Name = "dataGridView3";
-            this.dataGridView3.RowTemplate.Height = 25;
-            this.dataGridView3.Size = new System.Drawing.Size(450, 94);
-            this.dataGridView3.TabIndex = 14;
+            this.exhibitionHistory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.exhibitionHistory.Location = new System.Drawing.Point(218, 202);
+            this.exhibitionHistory.Name = "exhibitionHistory";
+            this.exhibitionHistory.RowTemplate.Height = 25;
+            this.exhibitionHistory.Size = new System.Drawing.Size(450, 94);
+            this.exhibitionHistory.TabIndex = 14;
             // 
             // editionCheckBox
             // 
@@ -360,7 +360,7 @@ namespace Capstone_Project
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.exhibitionHistory)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
@@ -392,7 +392,7 @@ namespace Capstone_Project
         private System.Windows.Forms.TextBox editionText;
         private System.Windows.Forms.TextBox soldText;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.DataGridView dataGridView3;
+        private System.Windows.Forms.DataGridView exhibitionHistory;
         private System.Windows.Forms.Button saveButton;
         private System.Windows.Forms.Button editButton;
         private System.Windows.Forms.TextBox notesText;

@@ -14,7 +14,7 @@ namespace Capstone_Project
         ///  The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main()//connection string: root@localhost:3306
+        static void Main()// put in app.config file connection string: root@localhost:3306
         {
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();

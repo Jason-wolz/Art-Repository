@@ -24,6 +24,12 @@ namespace Capstone_Project
                     ConnectionString = connString
                 };
                 conn.Open();
+                string selectString = "Select * from exhibition";
+                MySqlCommand cmd = new MySqlCommand(selectString, conn);
+                MySqlDataAdapter adapt = new MySqlDataAdapter(cmd);
+                DataTable exhibition = new DataTable();
+                adapt.Fill(exhibition);
+                exhibitionHistory.DataSource = exhibition;
             }
             catch (MySql.Data.MySqlClient.MySqlException ex)
             {
