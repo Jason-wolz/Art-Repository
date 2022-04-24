@@ -1,16 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 
 namespace Capstone_Project
 {
     public partial class ExhibitionScreen : Form
     {
-        public ExhibitionScreen()
+        public ExhibitionScreen()//move screen to connect to calendar page or make new page to display all exhibitions
         {
             InitializeComponent();
         }
@@ -24,7 +21,8 @@ namespace Capstone_Project
 
         private void SinglePieceButton_Click(object sender, EventArgs e)
         {
-            var f = new SinglePieceScreen();
+            Program.fromCollection = false;
+            var f = new SinglePieceScreen(new Artwork());
             this.Hide();
             f.Show();
         }

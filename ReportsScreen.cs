@@ -1,15 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 
 namespace Capstone_Project
 {
-    public partial class ReportsScreen : Form
-    {
+    public partial class ReportsScreen : Form//report ideas:pieces done latest year-possibly summary description
+    {//                                                     full info about a piece dumped to text file
         public ReportsScreen()
         {
             InitializeComponent();

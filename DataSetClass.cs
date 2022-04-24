@@ -1,31 +1,65 @@
-﻿//using System.Data;
-//using System.Data.SqlClient;
-//using System.Text;
-//using MySql.Data.MySqlClient;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Data.Common;
+using MySql.Data.MySqlClient;
+using Dapper;
 
-//namespace Capstone_Project
-//{
-//    class DataSetClass
-//    {
-//        static void DataSetClass()
-//        {
-//            string connString = "server=localhost;user id=root;database=mydb;persistsecurityinfo=True";
-//            ConnectToData(connString);
-//        }
-//        private static void ConnectToData(string connString)
-//        {
-//            using MySql.Data.MySqlClient.MySqlConnection conn = new MySql.Data.MySqlClient.MySqlConnection(connString);
-//            MySqlDataAdapter artAdapt = new MySqlDataAdapter();
-//            MySqlDataAdapter photoAdapt = new MySqlDataAdapter();
-//            MySqlDataAdapter exhibitionAdapt = new MySqlDataAdapter();
-//            MySqlDataAdapter interfaceAdapt = new MySqlDataAdapter();
-//            artAdapt.TableMappings.Add("Table", "artwork");
-//            photoAdapt.TableMappings.Add("Table", "photos");
-//            exhibitionAdapt.TableMappings.Add("Table", "ehibition");
-//            interfaceAdapt.TableMappings.Add("Table", "exhibition interface");
+namespace Capstone_Project
+{
+    class DataSetClass
+    {
+        //method for connecting to database from Youtuber IAmTimCorey  
+        public static List<Table> ConnectToData(string connType, int id)
+        {
+            var list = new List<Table>();
+            if (connType == "Simple Exhibition")
+            {
+                using (DbConnection connection = new MySqlConnection(Helper.connString("MyDB")))
+                {
+                    list.AddRange(connection.Query<Exhibition>("mydb.GetSimpleExhibition(@ID)", new { ID = id}).ToList());
+                    return list;
+                }
+            }
+            else
+            {
+                return list;
+            }
+        }
 
-//            conn.Open();
+        public static List<Table> ConnectToData(string connType)
+        {
+            var list = new List<Table>();
+            if (connType == "Full Exhibition")
+            {
+                using (DbConnection connection = new MySqlConnection(Helper.connString("MyDB")))
+                {
+                    list.AddRange(connection.Query<Exhibition>("mydb.GetFullExhibition").ToList());
+                    return list;
+                }
+            }
+            else if (connType == "All Artwork")
+            {
+                using (DbConnection connection = new MySqlConnection(Helper.connString("MyDB")))
+                {
+                    list.AddRange(connection.Query<Artwork>("mydb.GetAllArtwork").ToList());
+                    return list;
+                }
+            }
+            else
+            {
+                return list;
+            }
+        }
 
-//        }
-//    }
-//}
+        public static void UpdateTable()
+        {
+            throw new NotImplementedException();
+        }
+
+        public static void DeleteRecord()
+        {
+            throw new NotImplementedException();
+        }
+    }
+}

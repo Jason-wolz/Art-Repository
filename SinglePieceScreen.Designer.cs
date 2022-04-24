@@ -29,7 +29,7 @@ namespace Capstone_Project
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SinglePieceScreen));
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.framedCheckBox = new System.Windows.Forms.CheckBox();
@@ -57,7 +57,6 @@ namespace Capstone_Project
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -69,7 +68,6 @@ namespace Capstone_Project
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -94,7 +92,7 @@ namespace Capstone_Project
             // 
             this.framedCheckBox.AutoSize = true;
             this.framedCheckBox.Enabled = false;
-            this.framedCheckBox.Location = new System.Drawing.Point(19, 277);
+            this.framedCheckBox.Location = new System.Drawing.Point(14, 287);
             this.framedCheckBox.Name = "framedCheckBox";
             this.framedCheckBox.Size = new System.Drawing.Size(66, 19);
             this.framedCheckBox.TabIndex = 3;
@@ -158,8 +156,8 @@ namespace Capstone_Project
             this.splitContainer1.Panel2.Controls.Add(this.pictureBox4);
             this.splitContainer1.Panel2.Controls.Add(this.pictureBox3);
             this.splitContainer1.Panel2.Controls.Add(this.pictureBox2);
-            this.splitContainer1.Size = new System.Drawing.Size(688, 472);
-            this.splitContainer1.SplitterDistance = 308;
+            this.splitContainer1.Size = new System.Drawing.Size(688, 493);
+            this.splitContainer1.SplitterDistance = 321;
             this.splitContainer1.TabIndex = 8;
             // 
             // dateText
@@ -251,7 +249,7 @@ namespace Capstone_Project
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(218, 172);
+            this.label5.Location = new System.Drawing.Point(211, 155);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(101, 15);
             this.label5.TabIndex = 15;
@@ -259,11 +257,13 @@ namespace Capstone_Project
             // 
             // exhibitionHistory
             // 
+            this.exhibitionHistory.AllowUserToAddRows = false;
+            this.exhibitionHistory.AllowUserToDeleteRows = false;
             this.exhibitionHistory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.exhibitionHistory.Location = new System.Drawing.Point(218, 202);
+            this.exhibitionHistory.Location = new System.Drawing.Point(218, 173);
             this.exhibitionHistory.Name = "exhibitionHistory";
             this.exhibitionHistory.RowTemplate.Height = 25;
-            this.exhibitionHistory.Size = new System.Drawing.Size(450, 94);
+            this.exhibitionHistory.Size = new System.Drawing.Size(450, 133);
             this.exhibitionHistory.TabIndex = 14;
             // 
             // editionCheckBox
@@ -301,9 +301,11 @@ namespace Capstone_Project
             // 
             // pictureBox1
             // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.Location = new System.Drawing.Point(14, 15);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(186, 259);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 8;
             this.pictureBox1.TabStop = false;
             // 
@@ -355,6 +357,7 @@ namespace Capstone_Project
             this.Controls.Add(this.splitContainer1);
             this.Name = "SinglePieceScreen";
             this.Text = "SinglePieceScreen";
+            this.Load += new System.EventHandler(this.SinglePieceScreen_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();
             this.splitContainer1.Panel2.ResumeLayout(false);
@@ -367,7 +370,6 @@ namespace Capstone_Project
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -401,6 +403,5 @@ namespace Capstone_Project
         private System.Windows.Forms.TextBox titleText;
         private System.Windows.Forms.Button backButton;
         private System.Windows.Forms.TextBox dateText;
-        private System.Windows.Forms.BindingSource bindingSource1;
     }
 }

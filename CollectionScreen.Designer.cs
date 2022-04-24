@@ -31,11 +31,15 @@ namespace Capstone_Project
         {
             this.backButton = new System.Windows.Forms.Button();
             this.singlePieceButton = new System.Windows.Forms.Button();
+            this.artDataGrid = new System.Windows.Forms.DataGridView();
+            this.samplePicture = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.artDataGrid)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.samplePicture)).BeginInit();
             this.SuspendLayout();
             // 
             // backButton
             // 
-            this.backButton.Location = new System.Drawing.Point(64, 358);
+            this.backButton.Location = new System.Drawing.Point(407, 322);
             this.backButton.Name = "backButton";
             this.backButton.Size = new System.Drawing.Size(75, 23);
             this.backButton.TabIndex = 0;
@@ -45,7 +49,7 @@ namespace Capstone_Project
             // 
             // singlePieceButton
             // 
-            this.singlePieceButton.Location = new System.Drawing.Point(197, 358);
+            this.singlePieceButton.Location = new System.Drawing.Point(504, 322);
             this.singlePieceButton.Name = "singlePieceButton";
             this.singlePieceButton.Size = new System.Drawing.Size(75, 23);
             this.singlePieceButton.TabIndex = 1;
@@ -53,15 +57,41 @@ namespace Capstone_Project
             this.singlePieceButton.UseVisualStyleBackColor = true;
             this.singlePieceButton.Click += new System.EventHandler(this.singlePieceButton_Click);
             // 
+            // artDataGrid
+            // 
+            this.artDataGrid.AllowUserToAddRows = false;
+            this.artDataGrid.AllowUserToDeleteRows = false;
+            this.artDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.artDataGrid.Location = new System.Drawing.Point(155, 34);
+            this.artDataGrid.Name = "artDataGrid";
+            this.artDataGrid.ReadOnly = true;
+            this.artDataGrid.RowTemplate.Height = 25;
+            this.artDataGrid.Size = new System.Drawing.Size(424, 237);
+            this.artDataGrid.TabIndex = 2;
+            this.artDataGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.artDataGrid_CellContentClick);
+            // 
+            // samplePicture
+            // 
+            this.samplePicture.Location = new System.Drawing.Point(12, 34);
+            this.samplePicture.Name = "samplePicture";
+            this.samplePicture.Size = new System.Drawing.Size(137, 237);
+            this.samplePicture.TabIndex = 3;
+            this.samplePicture.TabStop = false;
+            // 
             // CollectionScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(436, 450);
+            this.ClientSize = new System.Drawing.Size(610, 374);
+            this.Controls.Add(this.samplePicture);
+            this.Controls.Add(this.artDataGrid);
             this.Controls.Add(this.singlePieceButton);
             this.Controls.Add(this.backButton);
             this.Name = "CollectionScreen";
             this.Text = "CollectionScreen";
+            this.Load += new System.EventHandler(this.CollectionScreen_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.artDataGrid)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.samplePicture)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -70,5 +100,7 @@ namespace Capstone_Project
 
         private System.Windows.Forms.Button backButton;
         private System.Windows.Forms.Button singlePieceButton;
+        private System.Windows.Forms.DataGridView artDataGrid;
+        private System.Windows.Forms.PictureBox samplePicture;
     }
 }

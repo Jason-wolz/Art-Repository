@@ -1,39 +1,33 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
-using MySql.Data.MySqlClient;
+
 
 namespace Capstone_Project
 {
-    public partial class SinglePieceScreen : Form//check whether user came from Collection or Exhibition screen
+    public partial class SinglePieceScreen : Form
     {
-        public SinglePieceScreen()
+        public SinglePieceScreen(Artwork artwork)
         {
             InitializeComponent();
-            MySql.Data.MySqlClient.MySqlConnection conn;
-            string connString = "server=localhost;user id=root;database=mydb;persistsecurityinfo=True";
-
-            try
+            if (artwork != null)
             {
-                conn = new MySql.Data.MySqlClient.MySqlConnection
+                titleText.Text = artwork.title;
+                mediumText.Text = artwork.medium;
+                dimensionsText.Text = artwork.length + " x " + artwork.width;
+                dateText.Text = artwork.date.ToString();
+                notesText.Text = artwork.notes;
+                framedCheckBox.Checked = artwork.isFramed;
+                if (artwork.saleDetails != "" && artwork.saleDetails != null)
                 {
-                    ConnectionString = connString
-                };
-                conn.Open();
-                string selectString = "Select * from exhibition";
-                MySqlCommand cmd = new MySqlCommand(selectString, conn);
-                MySqlDataAdapter adapt = new MySqlDataAdapter(cmd);
-                DataTable exhibition = new DataTable();
-                adapt.Fill(exhibition);
-                exhibitionHistory.DataSource = exhibition;
-            }
-            catch (MySql.Data.MySqlClient.MySqlException ex)
-            {
-                MessageBox.Show(ex.Message);
+                    soldCheckBox.Checked = true;
+                    soldCheckBox.Text = artwork.saleDetails;
+                }
+                if (artwork.editionDetails != "" && artwork.editionDetails != null)
+                {
+                    editionCheckBox.Checked = true;
+                    editionCheckBox.Text = artwork.editionDetails;
+                }
             }
         }
 
@@ -64,9 +58,18 @@ namespace Capstone_Project
 
         private void BackButton_Click(object sender, EventArgs e)
         {
-            var f = new CollectionScreen();
-            this.Hide();
-            f.Show();
+            if (Program.fromCollection)
+            {
+                var f = new CollectionScreen();
+                this.Hide();
+                f.Show();
+            }
+            else
+            {
+                var f = new ExhibitionScreen();
+                this.Hide();
+                f.Show();
+            }
         }
 
         private void SoldCheckBox_CheckedChanged(object sender, EventArgs e)
@@ -91,6 +94,23 @@ namespace Capstone_Project
             {
                 editionText.Enabled = false;
             }
+        }
+
+        private void SinglePieceScreen_Load(object sender, EventArgs e)
+        {//populate form w/ data
+            Dapper.DefaultTypeMap.MatchNamesWithUnderscores = true;
+            exhibitionHistory.DataSource = DataSetClass.ConnectToData("Simple Exhibition", 1);
+            //exhibitionHistory.Columns.Remove("ExhibitionID");
+            //exhibitionHistory.Columns.Remove("Address");
+            //exhibitionHistory.Columns.Remove("City");
+            //exhibitionHistory.Columns.Remove("ZipCode");
+            //exhibitionHistory.Columns.Remove("Country");
+            //exhibitionHistory.Columns.Remove("ApplicationFee");
+            //exhibitionHistory.Columns.Remove("Juror");
+            //use this format to add photos.To-Do:: get database working to add just as many pictureBoxes as needed
+            Bitmap image = new Bitmap("C:\\Users\\jason\\source\\repos\\Jason-wolz\\Capstone-Project\\Photos\\03-15-21_10-02-54 PM.png");
+            pictureBox1.Image = image;
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
         }
     }
 }
