@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 
 
@@ -9,7 +10,34 @@ namespace Capstone_Project
     {
         public SinglePieceScreen(Artwork artwork)
         {
-            InitializeComponent();
+            InitializeComponent();//For Future:: make screen about 50% bigger on each side, able to adapt to window size if able
+            var photos = DataSetClass.ConnectToData("Photos", Program.rowID + 1);
+            if (photos.Count > 0)
+            {
+                var specificPhotos = photos.Cast<Photos>().ToList();
+                var image = new Bitmap(specificPhotos[0].url);
+                samplePicture.Image = image;
+                if (specificPhotos.Count > 1)
+                {
+                    foreach (Control c in this.Controls)
+                    {
+                        if (c is SplitContainer container)
+                        {
+                            for(int i = 1; i < photos.Count; i++)//picture boxes = number of photos for this art - 1, 37 units apart
+                            {
+                                var pic = new Bitmap(specificPhotos[i].url);
+                                PictureBox pictureBox = new PictureBox();
+                                pictureBox.Image = pic;
+                                pictureBox.SizeMode = PictureBoxSizeMode.Zoom;
+                                pictureBox.Size = new Size(100, 100);
+                                pictureBox.Location = new Point((39 * i) - 19, 39);
+                                container.Panel2.Controls.Add(pictureBox);
+                            }
+                        }
+                    }
+                }
+            }
+            
             if (artwork != null)
             {
                 titleText.Text = artwork.title;
@@ -21,12 +49,12 @@ namespace Capstone_Project
                 if (artwork.saleDetails != "" && artwork.saleDetails != null)
                 {
                     soldCheckBox.Checked = true;
-                    soldCheckBox.Text = artwork.saleDetails;
+                    soldText.Text = artwork.saleDetails;
                 }
                 if (artwork.editionDetails != "" && artwork.editionDetails != null)
                 {
                     editionCheckBox.Checked = true;
-                    editionCheckBox.Text = artwork.editionDetails;
+                    editionText.Text = artwork.editionDetails;
                 }
             }
         }
@@ -99,18 +127,15 @@ namespace Capstone_Project
         private void SinglePieceScreen_Load(object sender, EventArgs e)
         {//populate form w/ data
             Dapper.DefaultTypeMap.MatchNamesWithUnderscores = true;
-            exhibitionHistory.DataSource = DataSetClass.ConnectToData("Simple Exhibition", 1);
-            //exhibitionHistory.Columns.Remove("ExhibitionID");
-            //exhibitionHistory.Columns.Remove("Address");
-            //exhibitionHistory.Columns.Remove("City");
-            //exhibitionHistory.Columns.Remove("ZipCode");
-            //exhibitionHistory.Columns.Remove("Country");
-            //exhibitionHistory.Columns.Remove("ApplicationFee");
-            //exhibitionHistory.Columns.Remove("Juror");
-            //use this format to add photos.To-Do:: get database working to add just as many pictureBoxes as needed
-            Bitmap image = new Bitmap("C:\\Users\\jason\\source\\repos\\Jason-wolz\\Capstone-Project\\Photos\\03-15-21_10-02-54 PM.png");
-            pictureBox1.Image = image;
-            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            var list = DataSetClass.ConnectToData("Simple Exhibition", 1);
+            exhibitionHistory.DataSource = list.Cast<Exhibition>().ToList();
+            exhibitionHistory.Columns.Remove("Exhibitionid");
+            exhibitionHistory.Columns.Remove("Address");
+            exhibitionHistory.Columns.Remove("City");
+            exhibitionHistory.Columns.Remove("ZipCode");
+            exhibitionHistory.Columns.Remove("Country");
+            exhibitionHistory.Columns.Remove("ApplicationFee");
+            exhibitionHistory.Columns.Remove("Juror");
         }
     }
 }

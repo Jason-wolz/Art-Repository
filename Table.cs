@@ -23,7 +23,7 @@ namespace Capstone_Project
      
     public class Artwork : Table
     {
-        public int id { get; set; }
+        public int artworkID { get; set; }
         public string title { get; set; }
         public string medium { get; set; }
         public string length { get; set; }
@@ -37,14 +37,14 @@ namespace Capstone_Project
 
     public class Photos : Table
     {
-        public int id { get; set; }
+        public int photoId { get; set; }
         public int artworkId { get; set; }
         public string url { get; set; }
     }
 
     public class Interface : Table
     {
-        public int id { get; set; }
+        public int interfaceId { get; set; }
         public int exhibitionId { get; set; }
         public int artworkId { get; set; }
     }

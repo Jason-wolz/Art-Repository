@@ -8,7 +8,7 @@ namespace Capstone_Project
         public static bool nightMode = false;      //maybe single art
         public static int fontSize = 1;            //simple exhibitionx
         public static bool fromCollection;         //all exhibitionx
-        public static int rowID;                   //maybe single exhibition
+        public static int rowID;               //maybe single exhibition
         /// <summary>                              //all art done in last 12 months
         ///  The main entry point for the application.
         /// </summary>

@@ -21,6 +21,14 @@ namespace Capstone_Project
                     return list;
                 }
             }
+            else if (connType == "Photos")
+            {
+                using (DbConnection connection = new MySqlConnection(Helper.connString("MyDB")))
+                {
+                    list.AddRange(connection.Query<Photos>("mydb.GetPhotos(@ArtID)", new { ArtID = id }).ToList());
+                    return list;
+                }
+            }
             else
             {
                 return list;
