@@ -34,6 +34,7 @@ namespace Capstone_Project
             this.artDataGrid = new System.Windows.Forms.DataGridView();
             this.samplePicture = new System.Windows.Forms.PictureBox();
             this.errorText = new System.Windows.Forms.Label();
+            this.newButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.artDataGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.samplePicture)).BeginInit();
             this.SuspendLayout();
@@ -71,7 +72,8 @@ namespace Capstone_Project
             this.artDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.artDataGrid.Size = new System.Drawing.Size(424, 237);
             this.artDataGrid.TabIndex = 2;
-            this.artDataGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.artDataGrid_CellContentClick);
+            this.artDataGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.artDataGrid_CellClick);
+            this.artDataGrid.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.artDataGrid_CellDoubleClick);
             // 
             // samplePicture
             // 
@@ -90,11 +92,22 @@ namespace Capstone_Project
             this.errorText.Size = new System.Drawing.Size(0, 15);
             this.errorText.TabIndex = 4;
             // 
+            // newButton
+            // 
+            this.newButton.Location = new System.Drawing.Point(155, 322);
+            this.newButton.Name = "newButton";
+            this.newButton.Size = new System.Drawing.Size(75, 23);
+            this.newButton.TabIndex = 5;
+            this.newButton.Text = "New Piece";
+            this.newButton.UseVisualStyleBackColor = true;
+            this.newButton.Click += new System.EventHandler(this.newButton_Click);
+            // 
             // CollectionScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(610, 374);
+            this.Controls.Add(this.newButton);
             this.Controls.Add(this.errorText);
             this.Controls.Add(this.samplePicture);
             this.Controls.Add(this.artDataGrid);
@@ -102,6 +115,7 @@ namespace Capstone_Project
             this.Controls.Add(this.backButton);
             this.Name = "CollectionScreen";
             this.Text = "CollectionScreen";
+            this.Load += new System.EventHandler(this.CollectionScreen_Load);
             ((System.ComponentModel.ISupportInitialize)(this.artDataGrid)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.samplePicture)).EndInit();
             this.ResumeLayout(false);
@@ -116,5 +130,6 @@ namespace Capstone_Project
         private System.Windows.Forms.DataGridView artDataGrid;
         private System.Windows.Forms.PictureBox samplePicture;
         private System.Windows.Forms.Label errorText;
+        private System.Windows.Forms.Button newButton;
     }
 }

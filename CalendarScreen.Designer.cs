@@ -29,9 +29,11 @@
         private void InitializeComponent()
         {
             this.backButton = new System.Windows.Forms.Button();
-            this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.exhibitionCalendar = new System.Windows.Forms.MonthCalendar();
+            this.exhibitionView = new System.Windows.Forms.DataGridView();
+            this.exhibitionButton = new System.Windows.Forms.Button();
+            this.newButton = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.exhibitionView)).BeginInit();
             this.SuspendLayout();
             // 
             // backButton
@@ -44,33 +46,60 @@
             this.backButton.UseVisualStyleBackColor = true;
             this.backButton.Click += new System.EventHandler(this.backButton_Click);
             // 
-            // monthCalendar1
+            // exhibitionCalendar
             // 
-            this.monthCalendar1.CalendarDimensions = new System.Drawing.Size(2, 2);
-            this.monthCalendar1.Location = new System.Drawing.Point(18, 29);
-            this.monthCalendar1.Name = "monthCalendar1";
-            this.monthCalendar1.TabIndex = 1;
+            this.exhibitionCalendar.CalendarDimensions = new System.Drawing.Size(2, 2);
+            this.exhibitionCalendar.Location = new System.Drawing.Point(18, 29);
+            this.exhibitionCalendar.Name = "exhibitionCalendar";
+            this.exhibitionCalendar.TabIndex = 1;
             // 
-            // dataGridView1
+            // exhibitionView
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(516, 29);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowTemplate.Height = 25;
-            this.dataGridView1.Size = new System.Drawing.Size(240, 309);
-            this.dataGridView1.TabIndex = 2;
+            this.exhibitionView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.exhibitionView.Location = new System.Drawing.Point(516, 29);
+            this.exhibitionView.Name = "exhibitionView";
+            this.exhibitionView.RowHeadersVisible = false;
+            this.exhibitionView.RowTemplate.Height = 25;
+            this.exhibitionView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.exhibitionView.Size = new System.Drawing.Size(240, 309);
+            this.exhibitionView.TabIndex = 2;
+            this.exhibitionView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.exhibitionView_CellClick);
+            this.exhibitionView.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.exhibitionView_CellContentDoubleClick);
+            // 
+            // exhibitionButton
+            // 
+            this.exhibitionButton.Location = new System.Drawing.Point(557, 354);
+            this.exhibitionButton.Name = "exhibitionButton";
+            this.exhibitionButton.Size = new System.Drawing.Size(86, 38);
+            this.exhibitionButton.TabIndex = 3;
+            this.exhibitionButton.Text = "Go to this Exhibition";
+            this.exhibitionButton.UseVisualStyleBackColor = true;
+            this.exhibitionButton.Click += new System.EventHandler(this.exhibitionButton_Click);
+            // 
+            // newButton
+            // 
+            this.newButton.Location = new System.Drawing.Point(421, 354);
+            this.newButton.Name = "newButton";
+            this.newButton.Size = new System.Drawing.Size(75, 38);
+            this.newButton.TabIndex = 4;
+            this.newButton.Text = "New Exhibition";
+            this.newButton.UseVisualStyleBackColor = true;
+            this.newButton.Click += new System.EventHandler(this.newButton_Click);
             // 
             // CalendarScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(778, 406);
-            this.Controls.Add(this.dataGridView1);
-            this.Controls.Add(this.monthCalendar1);
+            this.Controls.Add(this.newButton);
+            this.Controls.Add(this.exhibitionButton);
+            this.Controls.Add(this.exhibitionView);
+            this.Controls.Add(this.exhibitionCalendar);
             this.Controls.Add(this.backButton);
             this.Name = "CalendarScreen";
             this.Text = "CalendarScreen";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.Load += new System.EventHandler(this.CalendarScreen_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.exhibitionView)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -78,7 +107,9 @@
         #endregion
 
         private System.Windows.Forms.Button backButton;
-        private System.Windows.Forms.MonthCalendar monthCalendar1;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.MonthCalendar exhibitionCalendar;
+        private System.Windows.Forms.DataGridView exhibitionView;
+        private System.Windows.Forms.Button exhibitionButton;
+        private System.Windows.Forms.Button newButton;
     }
 }

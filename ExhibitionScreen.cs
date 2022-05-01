@@ -1,52 +1,166 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace Capstone_Project
 {
     public partial class ExhibitionScreen : Form
     {
-        public ExhibitionScreen()//move screen to connect to calendar page or make new page to display all exhibitions
+        readonly bool isNew;
+        readonly int exhibID;
+        bool isEditing = false;
+        readonly List<Artwork> list = new List<Artwork>();
+        public ExhibitionScreen(Exhibition exhibition)//to-do:: add way to add/delete art from exhibitions
         {
             InitializeComponent();
+            if (exhibition.exhibitionId > 0)
+            {
+                exhibID = exhibition.exhibitionId;
+                nameText.Text = exhibition.name;
+                addressText.Text = exhibition.address;
+                cityText.Text = exhibition.city;
+                stateText.Text = exhibition.state;
+                zipText.Text = exhibition.zipCode;
+                countryText.Text = exhibition.country;
+                startTime.Value = exhibition.startDate;
+                endTime.Value = exhibition.endDate;
+                if (exhibition.juror != "" && exhibition.juror != null)
+                {
+                    juriedCheckBox.Checked = true;
+                    juriedText.Text = exhibition.juror;
+                    juriedText.Enabled = false;
+                }
+                if (exhibition.applicationFee > 0)
+                {
+                    feeCheckBox.Checked = true;
+                    feeText.Text = exhibition.applicationFee.ToString();
+                    feeText.Enabled = false;
+                }
+                isNew = false;
+            }
+            else
+            {
+                isNew = true;
+                SaveEditButton_Click(this, new EventArgs());
+            }
+            var temp = DataSetClass.ConnectToData(Program.simpleArt, exhibition.exhibitionId);
+            list = temp.Cast<Artwork>().ToList();
+            artView.DataSource = list;
+            artView.Columns["artworkID"].Visible = false;
         }
 
         private void BackButton_Click(object sender, EventArgs e)
         {
-            var f = new MainScreen();
-            this.Hide();
-            f.Show();
+            if (isEditing)
+            {
+                saveEditButton.Text = "Edit";
+                nameText.Enabled = false;
+                addressText.Enabled = false;
+                cityText.Enabled = false;
+                stateText.Enabled = false;
+                zipText.Enabled = false;
+                countryText.Enabled = false;
+                feeCheckBox.Enabled = false;
+                startTime.Enabled = false;
+                endTime.Enabled = false;
+                juriedCheckBox.Enabled = false;
+                deleteButton.Visible = false;
+                isEditing = !isEditing;
+            }
+            else
+            {
+                var f = new CalendarScreen();
+                this.Hide();
+                f.Show();
+            }            
         }
 
         private void SinglePieceButton_Click(object sender, EventArgs e)
         {
             Program.fromCollection = false;
-            var f = new SinglePieceScreen(new Artwork());
+            var f = new SinglePieceScreen(list[Program.rowID]);
+            Program.rowID = exhibID - 1;
             this.Hide();
             f.Show();
         }
 
-        private void SaveButton_Click(object sender, EventArgs e)
+        private void SaveEditButton_Click(object sender, EventArgs e)
         {
-            nameText.Enabled = false;
-            locationText.Enabled = false;
-            feeCheckBox.Enabled = false;
-            startTime.Enabled = false;
-            endTime.Enabled = false;
-            juriedCheckBox.Enabled = false;
-            notesText.Enabled = false;
-        }
-
-        private void EditButton_Click(object sender, EventArgs e)
-        {
-            nameText.Enabled = true;
-            locationText.Enabled = true;
-            feeCheckBox.Enabled = true;
-            startTime.Enabled = true;
-            endTime.Enabled = true;
-            juriedCheckBox.Enabled = true;
-            notesText.Enabled = true;
+            if (!isEditing)
+            {
+                saveEditButton.Text = "Save";
+                nameText.Enabled = true;
+                addressText.Enabled = true;
+                cityText.Enabled = true;
+                stateText.Enabled = true;
+                zipText.Enabled = true;
+                countryText.Enabled = true;
+                feeCheckBox.Enabled = true;
+                startTime.Enabled = true;
+                endTime.Enabled = true;
+                juriedCheckBox.Enabled = true;
+                isEditing = !isEditing;
+                if (juriedCheckBox.Checked)
+                {
+                    juriedText.Enabled = true;
+                }
+                if (feeCheckBox.Checked)
+                {
+                    feeText.Enabled = true;
+                }
+                if (!isNew)
+                {
+                    deleteButton.Visible = true;
+                }
+            }
+            else
+            {
+                saveEditButton.Text = "Edit";
+                nameText.Enabled = false;
+                addressText.Enabled = false;
+                cityText.Enabled = false;
+                stateText.Enabled = false;
+                zipText.Enabled = false;
+                countryText.Enabled = false;
+                feeCheckBox.Enabled = false;
+                feeText.Enabled = false;
+                startTime.Enabled = false;
+                endTime.Enabled = false;
+                juriedCheckBox.Enabled = false;
+                juriedText.Enabled = false;
+                deleteButton.Visible = false;
+                isEditing = !isEditing;
+                Exhibition exhib = new Exhibition
+                {
+                    exhibitionId = exhibID,
+                    name = nameText.Text,
+                    address = addressText.Text,
+                    city = cityText.Text,
+                    state = stateText.Text,
+                    zipCode = zipText.Text,
+                    country = countryText.Text,
+                    startDate = startTime.Value,
+                    endDate = endTime.Value,
+                    juror = juriedText.Text
+                };
+                if (int.TryParse(feeText.Text,out int temp))
+                {
+                    exhib.applicationFee = temp;
+                }
+                else
+                {
+                    exhib.applicationFee = 0;
+                }
+                DataSetClass.UpdateTable(isNew, exhib); 
+                if (isNew)
+                {
+                    var f = new CalendarScreen();
+                    this.Hide();
+                    f.Show();
+                }
+            }            
         }
 
         private void FeeCheckBox_CheckedChanged(object sender, EventArgs e)
@@ -70,6 +184,59 @@ namespace Capstone_Project
             else 
             { 
                 juriedText.Enabled = false; 
+            }
+        }
+
+        private void deleteButton_Click(object sender, EventArgs e)
+        {
+            DialogResult message = MessageBox.Show("Are you sure you wish to delete this record?", "Confirm Delete?", MessageBoxButtons.YesNo);
+            if (message == DialogResult.Yes)
+            {
+                DataSetClass.DeleteRecord(Program.simpleExhib, exhibID);
+                var f = new CalendarScreen();
+                this.Hide();
+                f.Show();
+            }
+        }
+
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            Program.rowID = e.RowIndex;
+            singlePieceButton.Enabled = true;
+        }
+
+        private void artView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            SinglePieceButton_Click(this, new EventArgs());
+        }
+
+        private void ExhibitionScreen_Load(object sender, EventArgs e)
+        {
+            if (Program.nightMode)
+            {
+                BackColor = Program.nightColor;
+                ForeColor = System.Drawing.Color.White;
+                deleteButton.ForeColor = Control.DefaultForeColor;
+                backButton.ForeColor = Control.DefaultForeColor;
+                saveEditButton.ForeColor = Control.DefaultForeColor;
+                singlePieceButton.ForeColor = Control.DefaultForeColor;
+                artView.ForeColor = Control.DefaultForeColor;
+            }
+            else
+            {
+                BackColor = Program.dayColor;
+            }
+            if (Program.fontSize == 0)
+            {
+                Font = new System.Drawing.Font("Segoe UI", 9);
+            }
+            else if (Program.fontSize == 1)
+            {
+                Font = new System.Drawing.Font("Segoe UI", 12);
+            }
+            else
+            {
+                Font = new System.Drawing.Font("Segoe UI", 14);
             }
         }
     }

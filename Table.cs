@@ -28,17 +28,23 @@ namespace Capstone_Project
         public string medium { get; set; }
         public string length { get; set; }
         public string width { get; set; }
-        public DateTime date { get; set; }
+        public DateTime createDate { get; set; }
         public bool isFramed { get; set; }
         public string editionDetails { get; set; }
         public string saleDetails { get; set; }
         public string notes { get; set; }
+
+        public override string ToString()
+        {
+            string toString = "";
+            return toString;
+        }
     }
 
     public class Photos : Table
     {
-        public int photoId { get; set; }
-        public int artworkId { get; set; }
+        public int photoID { get; set; }
+        public int artworkID { get; set; }
         public string url { get; set; }
     }
 

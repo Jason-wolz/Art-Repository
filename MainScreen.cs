@@ -22,13 +22,6 @@ namespace Capstone_Project
             f.Show();
         }
 
-        private void historyButton_Click(object sender, EventArgs e)
-        {
-            var f = new ExhibitionScreen();
-            this.Hide();
-            f.Show();
-        }
-
         private void calendarButton_Click(object sender, EventArgs e)
         {
             var f = new CalendarScreen();
@@ -41,6 +34,30 @@ namespace Capstone_Project
             var f = new SettingsScreen();
             this.Hide();
             f.Show();
+        }
+
+        private void MainScreen_Load(object sender, EventArgs e)
+        {
+            if (Program.nightMode)
+            {
+                BackColor = Program.nightColor;
+            }
+            else
+            {
+                BackColor = Program.dayColor;
+            }
+            if (Program.fontSize == 0)
+            {
+                Font = new Font("Segoe UI", 9);
+            }
+            else if (Program.fontSize == 1)
+            {
+                Font = new Font("Segoe UI", 12);
+            }
+            else
+            {
+                Font = new Font("Segoe UI", 14);
+            }
         }
     }
 }

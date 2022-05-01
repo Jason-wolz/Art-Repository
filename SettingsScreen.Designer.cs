@@ -43,7 +43,7 @@ namespace Capstone_Project
             // 
             this.backButton.Location = new System.Drawing.Point(182, 256);
             this.backButton.Name = "backButton";
-            this.backButton.Size = new System.Drawing.Size(75, 23);
+            this.backButton.Size = new System.Drawing.Size(86, 30);
             this.backButton.TabIndex = 0;
             this.backButton.Text = "Back";
             this.backButton.UseVisualStyleBackColor = true;
@@ -51,9 +51,9 @@ namespace Capstone_Project
             // 
             // reportsButton
             // 
-            this.reportsButton.Location = new System.Drawing.Point(182, 185);
+            this.reportsButton.Location = new System.Drawing.Point(182, 205);
             this.reportsButton.Name = "reportsButton";
-            this.reportsButton.Size = new System.Drawing.Size(75, 23);
+            this.reportsButton.Size = new System.Drawing.Size(86, 34);
             this.reportsButton.TabIndex = 1;
             this.reportsButton.Text = "Reports";
             this.reportsButton.UseVisualStyleBackColor = true;
@@ -62,7 +62,7 @@ namespace Capstone_Project
             // nightCheck
             // 
             this.nightCheck.AutoSize = true;
-            this.nightCheck.Location = new System.Drawing.Point(174, 52);
+            this.nightCheck.Location = new System.Drawing.Point(165, 31);
             this.nightCheck.Name = "nightCheck";
             this.nightCheck.Size = new System.Drawing.Size(90, 19);
             this.nightCheck.TabIndex = 2;
@@ -85,9 +85,10 @@ namespace Capstone_Project
             // largeCheck
             // 
             this.largeCheck.AutoSize = true;
+            this.largeCheck.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.largeCheck.Location = new System.Drawing.Point(41, 71);
             this.largeCheck.Name = "largeCheck";
-            this.largeCheck.Size = new System.Drawing.Size(54, 19);
+            this.largeCheck.Size = new System.Drawing.Size(77, 29);
             this.largeCheck.TabIndex = 4;
             this.largeCheck.TabStop = true;
             this.largeCheck.Text = "Large";
@@ -97,9 +98,10 @@ namespace Capstone_Project
             // mediumCheck
             // 
             this.mediumCheck.AutoSize = true;
+            this.mediumCheck.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.mediumCheck.Location = new System.Drawing.Point(41, 46);
             this.mediumCheck.Name = "mediumCheck";
-            this.mediumCheck.Size = new System.Drawing.Size(70, 19);
+            this.mediumCheck.Size = new System.Drawing.Size(82, 24);
             this.mediumCheck.TabIndex = 5;
             this.mediumCheck.TabStop = true;
             this.mediumCheck.Text = "Medium";
@@ -113,7 +115,7 @@ namespace Capstone_Project
             this.groupBox1.Controls.Add(this.largeCheck);
             this.groupBox1.Location = new System.Drawing.Point(124, 77);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(200, 100);
+            this.groupBox1.Size = new System.Drawing.Size(200, 111);
             this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Text Size";
@@ -122,6 +124,7 @@ namespace Capstone_Project
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(460, 373);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.nightCheck);
