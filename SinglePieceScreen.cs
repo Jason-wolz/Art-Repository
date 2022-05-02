@@ -67,6 +67,7 @@ namespace Capstone_Project
                 var specificPhotos = photos.Cast<Photos>().ToList();
                 var image = new Bitmap(specificPhotos[0].url);
                 samplePicture.Image = image;
+                samplePicture.ImageLocation = specificPhotos[0].url;
                 pID = specificPhotos[0].photoID;
                 if (specificPhotos.Count > 1)
                 {
@@ -87,7 +88,8 @@ namespace Capstone_Project
                                     Image = pic,
                                     SizeMode = PictureBoxSizeMode.Zoom,
                                     Size = new Size(100, 100),
-                                    Location = new Point((120 * i) - 100, 39)
+                                    Location = new Point((120 * i) - 100, 39),
+                                    ImageLocation = specificPhotos[i].url
                                 };
                                 pictureBox.Click += PictureBox_Click;
                                 container.Panel2.Controls.Add(pictureBox);
@@ -105,16 +107,31 @@ namespace Capstone_Project
                 DialogResult message = MessageBox.Show("Are you sure you wish to delete this photo?", "Confirm Delete?", MessageBoxButtons.YesNo);
                 if (message == DialogResult.Yes)
                 {
-                    PictureBox p = (PictureBox)sender;
-                    if (p.Name == samplePicture.Name)
+                    try
                     {
-                        DataSetClass.DeleteRecord(Program.photos, pID);
+                        PictureBox p = (PictureBox)sender;
+                        string path;
+                        if (p.Name == samplePicture.Name)
+                        {
+                            path = samplePicture.ImageLocation;
+                            DataSetClass.DeleteRecord(Program.photos, pID);
+                        }
+                        else
+                        {
+                            path = "";
+                            int picID = int.Parse(p.Name[3..]);
+                            DataSetClass.DeleteRecord(Program.photos, picID);
+                        }
+                        //isEditing = false;
+                        //BackButton_Click(this, new EventArgs());
+                        RefreshPictures();
+                        File.Delete(path);
                     }
-                    else
+                    catch(Exception ex)
                     {
-                        int picID = int.Parse(p.Name[3..]);
-                        DataSetClass.DeleteRecord(Program.photos, picID);
+                        MessageBox.Show(ex.Message);
                     }
+                    //
                 }
             }            
         }
@@ -307,7 +324,7 @@ namespace Capstone_Project
             OpenFileDialog saveFile = new OpenFileDialog();
             saveFile.Filter = "JPeg Image|*.jpg|Bitmap Image|*.bmp|Gif Image|*.gif";
             saveFile.Title = "Save an Image File";
-            string filePath = "~\\Photos\\";
+            string filePath = "C:\\Users\\jason\\source\\repos\\Jason-wolz\\Capstone-Project\\Photos\\";
             saveFile.ShowDialog();
             if (saveFile.FileName != "")
             {
