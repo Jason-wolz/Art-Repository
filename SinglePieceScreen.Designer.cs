@@ -35,6 +35,8 @@ namespace Capstone_Project
             this.label3 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.deleteExhibButton = new System.Windows.Forms.Button();
+            this.newExhibButton = new System.Windows.Forms.Button();
             this.deletePhotoText = new System.Windows.Forms.Label();
             this.deletePhotoButton = new System.Windows.Forms.Button();
             this.addPhotoButton = new System.Windows.Forms.Button();
@@ -53,12 +55,13 @@ namespace Capstone_Project
             this.titleText = new System.Windows.Forms.TextBox();
             this.editionText = new System.Windows.Forms.TextBox();
             this.soldText = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
+            this.exhibText = new System.Windows.Forms.Label();
             this.exhibitionHistory = new System.Windows.Forms.DataGridView();
             this.editionCheckBox = new System.Windows.Forms.CheckBox();
             this.label4 = new System.Windows.Forms.Label();
             this.soldCheckBox = new System.Windows.Forms.CheckBox();
             this.samplePicture = new System.Windows.Forms.PictureBox();
+            this.errorLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.SuspendLayout();
@@ -123,6 +126,9 @@ namespace Capstone_Project
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.errorLabel);
+            this.splitContainer1.Panel1.Controls.Add(this.deleteExhibButton);
+            this.splitContainer1.Panel1.Controls.Add(this.newExhibButton);
             this.splitContainer1.Panel1.Controls.Add(this.deletePhotoText);
             this.splitContainer1.Panel1.Controls.Add(this.deletePhotoButton);
             this.splitContainer1.Panel1.Controls.Add(this.addPhotoButton);
@@ -141,7 +147,7 @@ namespace Capstone_Project
             this.splitContainer1.Panel1.Controls.Add(this.titleText);
             this.splitContainer1.Panel1.Controls.Add(this.editionText);
             this.splitContainer1.Panel1.Controls.Add(this.soldText);
-            this.splitContainer1.Panel1.Controls.Add(this.label5);
+            this.splitContainer1.Panel1.Controls.Add(this.exhibText);
             this.splitContainer1.Panel1.Controls.Add(this.exhibitionHistory);
             this.splitContainer1.Panel1.Controls.Add(this.editionCheckBox);
             this.splitContainer1.Panel1.Controls.Add(this.label4);
@@ -160,6 +166,27 @@ namespace Capstone_Project
             this.splitContainer1.SplitterDistance = 415;
             this.splitContainer1.TabIndex = 8;
             // 
+            // deleteExhibButton
+            // 
+            this.deleteExhibButton.Location = new System.Drawing.Point(34, 360);
+            this.deleteExhibButton.Name = "deleteExhibButton";
+            this.deleteExhibButton.Size = new System.Drawing.Size(85, 39);
+            this.deleteExhibButton.TabIndex = 39;
+            this.deleteExhibButton.Text = "Delete from Exhibition";
+            this.deleteExhibButton.UseVisualStyleBackColor = true;
+            this.deleteExhibButton.Visible = false;
+            this.deleteExhibButton.Click += new System.EventHandler(this.deleteExhibButton_Click);
+            // 
+            // newExhibButton
+            // 
+            this.newExhibButton.Location = new System.Drawing.Point(135, 360);
+            this.newExhibButton.Name = "newExhibButton";
+            this.newExhibButton.Size = new System.Drawing.Size(85, 39);
+            this.newExhibButton.TabIndex = 38;
+            this.newExhibButton.Text = "Add to Exhibition";
+            this.newExhibButton.UseVisualStyleBackColor = true;
+            this.newExhibButton.Click += new System.EventHandler(this.newExhibButton_Click);
+            // 
             // deletePhotoText
             // 
             this.deletePhotoText.AutoSize = true;
@@ -170,9 +197,9 @@ namespace Capstone_Project
             // 
             // deletePhotoButton
             // 
-            this.deletePhotoButton.Location = new System.Drawing.Point(140, 291);
+            this.deletePhotoButton.Location = new System.Drawing.Point(135, 296);
             this.deletePhotoButton.Name = "deletePhotoButton";
-            this.deletePhotoButton.Size = new System.Drawing.Size(75, 40);
+            this.deletePhotoButton.Size = new System.Drawing.Size(85, 29);
             this.deletePhotoButton.TabIndex = 36;
             this.deletePhotoButton.Text = "Delete Photo";
             this.deletePhotoButton.UseVisualStyleBackColor = true;
@@ -181,9 +208,9 @@ namespace Capstone_Project
             // 
             // addPhotoButton
             // 
-            this.addPhotoButton.Location = new System.Drawing.Point(44, 291);
+            this.addPhotoButton.Location = new System.Drawing.Point(34, 296);
             this.addPhotoButton.Name = "addPhotoButton";
-            this.addPhotoButton.Size = new System.Drawing.Size(75, 40);
+            this.addPhotoButton.Size = new System.Drawing.Size(75, 29);
             this.addPhotoButton.TabIndex = 35;
             this.addPhotoButton.Text = "Add Photo";
             this.addPhotoButton.UseVisualStyleBackColor = true;
@@ -253,9 +280,9 @@ namespace Capstone_Project
             // 
             // deleteButton
             // 
-            this.deleteButton.Location = new System.Drawing.Point(44, 370);
+            this.deleteButton.Location = new System.Drawing.Point(506, 12);
             this.deleteButton.Name = "deleteButton";
-            this.deleteButton.Size = new System.Drawing.Size(58, 29);
+            this.deleteButton.Size = new System.Drawing.Size(58, 28);
             this.deleteButton.TabIndex = 27;
             this.deleteButton.Text = "Delete";
             this.deleteButton.UseVisualStyleBackColor = true;
@@ -265,7 +292,7 @@ namespace Capstone_Project
             // backButton
             // 
             this.backButton.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.backButton.Location = new System.Drawing.Point(526, 8);
+            this.backButton.Location = new System.Drawing.Point(589, 12);
             this.backButton.Name = "backButton";
             this.backButton.Size = new System.Drawing.Size(58, 29);
             this.backButton.TabIndex = 25;
@@ -275,7 +302,7 @@ namespace Capstone_Project
             // 
             // saveEditButton
             // 
-            this.saveEditButton.Location = new System.Drawing.Point(608, 8);
+            this.saveEditButton.Location = new System.Drawing.Point(671, 12);
             this.saveEditButton.Name = "saveEditButton";
             this.saveEditButton.Size = new System.Drawing.Size(47, 29);
             this.saveEditButton.TabIndex = 24;
@@ -323,14 +350,14 @@ namespace Capstone_Project
             this.soldText.Size = new System.Drawing.Size(100, 23);
             this.soldText.TabIndex = 16;
             // 
-            // label5
+            // exhibText
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(243, 273);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(101, 15);
-            this.label5.TabIndex = 15;
-            this.label5.Text = "Exhibition History";
+            this.exhibText.AutoSize = true;
+            this.exhibText.Location = new System.Drawing.Point(243, 273);
+            this.exhibText.Name = "exhibText";
+            this.exhibText.Size = new System.Drawing.Size(101, 15);
+            this.exhibText.TabIndex = 15;
+            this.exhibText.Text = "Exhibition History";
             // 
             // exhibitionHistory
             // 
@@ -344,6 +371,7 @@ namespace Capstone_Project
             this.exhibitionHistory.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.exhibitionHistory.Size = new System.Drawing.Size(404, 108);
             this.exhibitionHistory.TabIndex = 14;
+            this.exhibitionHistory.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.exhibitionHistory_CellClick);
             // 
             // editionCheckBox
             // 
@@ -378,13 +406,21 @@ namespace Capstone_Project
             // 
             // samplePicture
             // 
-            this.samplePicture.Location = new System.Drawing.Point(44, 39);
+            this.samplePicture.Location = new System.Drawing.Point(34, 42);
             this.samplePicture.Name = "samplePicture";
             this.samplePicture.Size = new System.Drawing.Size(186, 248);
             this.samplePicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.samplePicture.TabIndex = 8;
             this.samplePicture.TabStop = false;
             this.samplePicture.Click += new System.EventHandler(this.PictureBox_Click);
+            // 
+            // errorLabel
+            // 
+            this.errorLabel.AutoSize = true;
+            this.errorLabel.Location = new System.Drawing.Point(34, 13);
+            this.errorLabel.Name = "errorLabel";
+            this.errorLabel.Size = new System.Drawing.Size(0, 15);
+            this.errorLabel.TabIndex = 40;
             // 
             // SinglePieceScreen
             // 
@@ -419,7 +455,7 @@ namespace Capstone_Project
         private System.Windows.Forms.CheckBox editionCheckBox;
         private System.Windows.Forms.TextBox editionText;
         private System.Windows.Forms.TextBox soldText;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label exhibText;
         private System.Windows.Forms.DataGridView exhibitionHistory;
         private System.Windows.Forms.Button saveEditButton;
         private System.Windows.Forms.TextBox lengthText;
@@ -437,5 +473,8 @@ namespace Capstone_Project
         private System.Windows.Forms.Label deletePhotoText;
         private System.Windows.Forms.Button deletePhotoButton;
         private System.Windows.Forms.Button addPhotoButton;
+        private System.Windows.Forms.Button newExhibButton;
+        private System.Windows.Forms.Button deleteExhibButton;
+        private System.Windows.Forms.Label errorLabel;
     }
 }

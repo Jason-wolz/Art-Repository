@@ -34,9 +34,14 @@ namespace Capstone_Project
         public string saleDetails { get; set; }
         public string notes { get; set; }
 
-        public override string ToString()
+        public override string ToString()//for use in the download report
         {
-            string toString = "";
+            string toString = "Title: " + title;
+            toString += "\nMedium: " + medium;
+            toString += "\nDimensions: " + length + " by " + width;
+            toString += "\nDate: " + createDate;
+            toString += "\nSale details: " +saleDetails;
+            toString += "\nEdition Details: " + editionDetails;//t0-do:: finish this outline, then do one for exhibition
             return toString;
         }
     }

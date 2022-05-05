@@ -35,6 +35,8 @@ namespace Capstone_Project
             this.samplePicture = new System.Windows.Forms.PictureBox();
             this.errorText = new System.Windows.Forms.Label();
             this.newButton = new System.Windows.Forms.Button();
+            this.searchButton = new System.Windows.Forms.Button();
+            this.searchText = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.artDataGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.samplePicture)).BeginInit();
             this.SuspendLayout();
@@ -64,7 +66,7 @@ namespace Capstone_Project
             this.artDataGrid.AllowUserToAddRows = false;
             this.artDataGrid.AllowUserToDeleteRows = false;
             this.artDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.artDataGrid.Location = new System.Drawing.Point(155, 34);
+            this.artDataGrid.Location = new System.Drawing.Point(155, 59);
             this.artDataGrid.Name = "artDataGrid";
             this.artDataGrid.ReadOnly = true;
             this.artDataGrid.RowHeadersVisible = false;
@@ -77,7 +79,7 @@ namespace Capstone_Project
             // 
             // samplePicture
             // 
-            this.samplePicture.Location = new System.Drawing.Point(12, 34);
+            this.samplePicture.Location = new System.Drawing.Point(12, 59);
             this.samplePicture.Name = "samplePicture";
             this.samplePicture.Size = new System.Drawing.Size(137, 237);
             this.samplePicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -102,11 +104,30 @@ namespace Capstone_Project
             this.newButton.UseVisualStyleBackColor = true;
             this.newButton.Click += new System.EventHandler(this.newButton_Click);
             // 
+            // searchButton
+            // 
+            this.searchButton.Location = new System.Drawing.Point(504, 21);
+            this.searchButton.Name = "searchButton";
+            this.searchButton.Size = new System.Drawing.Size(75, 23);
+            this.searchButton.TabIndex = 6;
+            this.searchButton.Text = "Search";
+            this.searchButton.UseVisualStyleBackColor = true;
+            this.searchButton.Click += new System.EventHandler(this.searchButton_Click);
+            // 
+            // searchText
+            // 
+            this.searchText.Location = new System.Drawing.Point(286, 21);
+            this.searchText.Name = "searchText";
+            this.searchText.Size = new System.Drawing.Size(196, 23);
+            this.searchText.TabIndex = 7;
+            // 
             // CollectionScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(610, 374);
+            this.Controls.Add(this.searchText);
+            this.Controls.Add(this.searchButton);
             this.Controls.Add(this.newButton);
             this.Controls.Add(this.errorText);
             this.Controls.Add(this.samplePicture);
@@ -131,5 +152,7 @@ namespace Capstone_Project
         private System.Windows.Forms.PictureBox samplePicture;
         private System.Windows.Forms.Label errorText;
         private System.Windows.Forms.Button newButton;
+        private System.Windows.Forms.Button searchButton;
+        private System.Windows.Forms.TextBox searchText;
     }
 }

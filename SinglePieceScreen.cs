@@ -14,7 +14,9 @@ namespace Capstone_Project
         readonly bool isNew;
         readonly int id;
         int pID;
-        List<Exhibition> list = new List<Exhibition>();//add way to add/delete photos
+        bool newExhib = false;
+        int exhibID = 0;
+        List<Exhibition> list = new List<Exhibition>();//to-do::finish photo deletion  instructor looking into problem, will get back to me on possible solutions
         public SinglePieceScreen(Artwork artwork)
         {
             InitializeComponent();//For Future:: make screen about 50% bigger on each side, able to adapt to window size if able
@@ -58,6 +60,10 @@ namespace Capstone_Project
             exhibitionHistory.Columns["Country"].Visible = false;
             exhibitionHistory.Columns["ApplicationFee"].Visible = false;
             exhibitionHistory.Columns["Juror"].Visible = false;
+            if (list.Count > 0)
+            {
+                deleteExhibButton.Visible = true;
+            }
         }
         private void RefreshPictures()
         {
@@ -79,7 +85,7 @@ namespace Capstone_Project
                             {
                                 container.Panel2.Controls.Remove(co);
                             }                        
-                            for (int i = 1; i < photos.Count; i++)//picture boxes = number of photos for this art - 1
+                            for (int i = 1; i < photos.Count; i++)
                             {
                                 var pic = new Bitmap(specificPhotos[i].url);
                                 PictureBox pictureBox = new PictureBox
@@ -98,6 +104,50 @@ namespace Capstone_Project
                     }
                 }
             }
+            else
+            {
+                samplePicture.Image = null;
+            }
+        }
+
+        private bool IsValid()
+        {
+            if (titleText.Text.Length > 45)
+            {
+                errorLabel.Text = "Title exceeds character limit of 45";
+                return false;
+            }
+            if (mediumText.Text.Length > 45)
+            {
+                errorLabel.Text = "Medium exceeds character limit of 45";
+                return false;
+            }
+            if (lengthText.Text.Length > 10)
+            {
+                errorLabel.Text = "Length exceeds character limit of 10";
+                return false;
+            }
+            if (widthText.Text.Length > 10)
+            {
+                errorLabel.Text = "Width exceeds character limit of 10";
+                return false;
+            }
+            if (soldText.Text.Length > 100)
+            {
+                errorLabel.Text = "Sold exceeds character limit of 100";
+                return false;
+            }
+            if (editionText.Text.Length > 45)
+            {
+                errorLabel.Text = "Edition exceeds character limit of 45";
+                return false;
+            }
+            if (notesText.Text.Length > 200)
+            {
+                errorLabel.Text = "Notes exceed character limit of 200";
+                return false;
+            }
+            return true;
         }
 
         private void PictureBox_Click(object sender, EventArgs e)
@@ -122,16 +172,16 @@ namespace Capstone_Project
                             int picID = int.Parse(p.Name[3..]);
                             DataSetClass.DeleteRecord(Program.photos, picID);
                         }
-                        //isEditing = false;
-                        //BackButton_Click(this, new EventArgs());
                         RefreshPictures();
+                        //isEditing = false;
+                        BackButton_Click(this, new EventArgs());
                         File.Delete(path);
                     }
                     catch(Exception ex)
                     {
                         MessageBox.Show(ex.Message);
-                    }
-                    //
+                    }                    
+                    
                 }
             }            
         }
@@ -166,7 +216,7 @@ namespace Capstone_Project
                     deletePhotoButton.Visible = true;
                 }
             }
-            else
+            else if (IsValid())
             {
                 saveEditButton.Text = "Edit";
                 titleText.Enabled = false;
@@ -198,7 +248,14 @@ namespace Capstone_Project
                     isFramed = framedCheckBox.Checked,
                     notes = notesText.Text
                 };
-                DataSetClass.UpdateTable(isNew, art);
+                try
+                {
+                    DataSetClass.UpdateTable(isNew, art);
+                }
+                catch(Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
                 if (isNew)
                 {
                     var f = new CollectionScreen();
@@ -210,7 +267,7 @@ namespace Capstone_Project
         }
 
         private void BackButton_Click(object sender, EventArgs e)
-        {//to-do:: maybe reset values?
+        {
             if (isEditing)
             {
                 saveEditButton.Text = "Edit";
@@ -280,7 +337,14 @@ namespace Capstone_Project
             DialogResult message = MessageBox.Show("Are you sure you wish to delete this record?","Confirm Delete?", MessageBoxButtons.YesNo);
             if (message == DialogResult.Yes)
             {
-                DataSetClass.DeleteRecord(Program.simpleArt, id);
+                try
+                {
+                    DataSetClass.DeleteRecord(Program.simpleArt, id);
+                }
+                catch(Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
                 var f = new CollectionScreen();
                 this.Hide();
                 f.Show();
@@ -317,13 +381,16 @@ namespace Capstone_Project
                 Font = new Font("Segoe UI", 14);
                 backButton.Font = Font;
             }
+            exhibitionHistory.Width = (exhibitionHistory.Columns[0].Width+ 1) * 4;
         }
 
         private void addPhotoButton_Click(object sender, EventArgs e)
         {
-            OpenFileDialog saveFile = new OpenFileDialog();
-            saveFile.Filter = "JPeg Image|*.jpg|Bitmap Image|*.bmp|Gif Image|*.gif";
-            saveFile.Title = "Save an Image File";
+            OpenFileDialog saveFile = new OpenFileDialog
+            {
+                Filter = "JPeg Image|*.jpg|Tiff Image|*.tif",
+                Title = "Save an Image File"
+            };
             string filePath = "C:\\Users\\jason\\source\\repos\\Jason-wolz\\Capstone-Project\\Photos\\";
             saveFile.ShowDialog();
             if (saveFile.FileName != "")
@@ -351,6 +418,62 @@ namespace Capstone_Project
         private void deletePhotoButton_Click(object sender, EventArgs e)
         {
             deletePhotoText.Text = "Delete which photo?";
+        }
+
+        private void newExhibButton_Click(object sender, EventArgs e)
+        {
+            if (!newExhib)
+            {
+                var temp = DataSetClass.ConnectToData(Program.allExhib);
+                list = temp.Cast<Exhibition>().ToList();
+                exhibitionHistory.DataSource = list;
+                exhibID = 0;
+                exhibText.Text = "All Exhibitions";
+                newExhibButton.Text = "Confirm";
+                deleteExhibButton.Visible = false;
+                newExhib = !newExhib;
+            }
+            else
+            {
+                var inter = new Interface
+                {
+                    exhibitionId = exhibID,
+                    artworkId = id
+                };
+                try
+                {
+                    DataSetClass.UpdateTable(true, inter);
+                }
+                catch(Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                var temp = DataSetClass.ConnectToData(Program.simpleExhib, id);
+                list = temp.Cast<Exhibition>().ToList();
+                exhibitionHistory.DataSource = list;
+                exhibText.Text = "Exhibition History";
+                newExhibButton.Text = "Add to Exhibition";
+                deleteExhibButton.Visible = true;
+                newExhib = !newExhib;
+            }
+        }
+
+        private void exhibitionHistory_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            exhibID = e.RowIndex;
+        }
+
+        private void deleteExhibButton_Click(object sender, EventArgs e)
+        {
+            DialogResult message = MessageBox.Show("Are you sure you wish to delete this record?", "Confirm Delete?", MessageBoxButtons.YesNo);
+            if (message == DialogResult.Yes)
+            {
+                try
+                {
+                    DataSetClass.DeleteRecord(Program.allExhib, exhibID);
+                }
+                catch (Exception ex) { MessageBox.Show(ex.Message); }
+            }
         }
     }
 }

@@ -9,7 +9,7 @@ namespace Capstone_Project
     public partial class CollectionScreen : Form
     {
         readonly List<Table> list = new List<Table>();
-        public CollectionScreen()//to-do:: make a way to search for art by name, year, dimensions, or medium
+        public CollectionScreen()
         {
             InitializeComponent();
             list = DataSetClass.ConnectToData(Program.allArt);
@@ -31,6 +31,7 @@ namespace Capstone_Project
             }
             else
             {
+                samplePicture.Image = null;
                 errorText.Text = "The system has no photos of this piece.";
             }
         }
@@ -96,6 +97,36 @@ namespace Capstone_Project
             {
                 Font = new Font("Segoe UI", 14);
             }
+        }
+
+        private void searchButton_Click(object sender, EventArgs e)
+        {
+            List<Artwork> list = new List<Artwork>();
+            if (DateTime.TryParse(searchText.Text + "-01-01", out DateTime date))
+            {
+                list.AddRange(DataSetClass.Search(date));
+
+            }
+            list.AddRange(DataSetClass.Search(Program.medium, searchText.Text));
+            list.AddRange(DataSetClass.Search(Program.name, searchText.Text));
+            List<int> dis = new List<int>();
+            List<int> del = new List<int>();
+            for (int i = 0; i < list.Count(); i++)
+            {
+                if (!dis.Contains(list[i].artworkID))
+                {
+                    dis.Add(list[i].artworkID);
+                }
+                else
+                {
+                    del.Add(i);
+                }
+            }
+            foreach (int i in del)
+            {
+                list.RemoveAt(i);
+            }
+            artDataGrid.DataSource = list;
         }
     }
 }

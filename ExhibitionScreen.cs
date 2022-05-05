@@ -12,7 +12,7 @@ namespace Capstone_Project
         readonly int exhibID;
         bool isEditing = false;
         readonly List<Artwork> list = new List<Artwork>();
-        public ExhibitionScreen(Exhibition exhibition)//to-do:: add way to add/delete art from exhibitions
+        public ExhibitionScreen(Exhibition exhibition)
         {
             InitializeComponent();
             if (exhibition.exhibitionId > 0)
@@ -48,7 +48,8 @@ namespace Capstone_Project
             var temp = DataSetClass.ConnectToData(Program.simpleArt, exhibition.exhibitionId);
             list = temp.Cast<Artwork>().ToList();
             artView.DataSource = list;
-            artView.Columns["artworkID"].Visible = false;
+            artView.Columns["artworkID"].Visible = false;//for-future:: rename isFramed column to Framed
+            artView.Columns["isFramed"].HeaderText = "Framed";
         }
 
         private void BackButton_Click(object sender, EventArgs e)
@@ -115,7 +116,7 @@ namespace Capstone_Project
                     deleteButton.Visible = true;
                 }
             }
-            else
+            else if (IsValid())
             {
                 saveEditButton.Text = "Edit";
                 nameText.Enabled = false;
@@ -153,7 +154,14 @@ namespace Capstone_Project
                 {
                     exhib.applicationFee = 0;
                 }
-                DataSetClass.UpdateTable(isNew, exhib); 
+                try
+                {
+                    DataSetClass.UpdateTable(isNew, exhib); 
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
                 if (isNew)
                 {
                     var f = new CalendarScreen();
@@ -192,7 +200,14 @@ namespace Capstone_Project
             DialogResult message = MessageBox.Show("Are you sure you wish to delete this record?", "Confirm Delete?", MessageBoxButtons.YesNo);
             if (message == DialogResult.Yes)
             {
-                DataSetClass.DeleteRecord(Program.simpleExhib, exhibID);
+                try
+                {
+                    DataSetClass.DeleteRecord(Program.simpleExhib, exhibID);
+                }
+                catch (Exception ex) 
+                { 
+                    MessageBox.Show(ex.Message); 
+                }
                 var f = new CalendarScreen();
                 this.Hide();
                 f.Show();
@@ -238,6 +253,52 @@ namespace Capstone_Project
             {
                 Font = new System.Drawing.Font("Segoe UI", 14);
             }
+        }
+
+        private bool IsValid()
+        {
+            if (nameText.Text.Length > 45)
+            {
+                errorText.Text = "Name exceeds character limit of 45";
+                return false;
+            }
+            if (addressText.Text.Length > 45)
+            {
+                errorText.Text = "Address exceeds character limit of 45";
+                return false;
+            }
+            if (cityText.Text.Length > 45)
+            {
+                errorText.Text = "City exceeds character limit of 45";
+                return false;
+            }
+            if (stateText.Text.Length > 45)
+            {
+                errorText.Text = "State exceeds character limit of 45";
+                return false;
+            }
+            if (zipText.Text.Length > 10)
+            {
+                errorText.Text = "Zip Code exceeds character limit of 10";
+                return false;
+            }
+            if (countryText.Text.Length > 45)
+            {
+                errorText.Text = "Country exceeds character limit of 45";
+                return false;
+            }
+            if (juriedText.Text.Length > 45)
+            {
+                errorText.Text = "Juried exceeds character limit of 45";
+                return false;
+            }
+
+            if (int.TryParse(feeText.Text, out _))
+            {
+                errorText.Text = "App Fee not in correct format, please enter a number";
+                return false;
+            }
+            return true;            
         }
     }
 }

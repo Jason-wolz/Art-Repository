@@ -57,6 +57,7 @@ namespace Capstone_Project
             this.countryText = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
+            this.errorText = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.artView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -316,11 +317,20 @@ namespace Capstone_Project
             this.label11.TabIndex = 32;
             this.label11.Text = "App Fee";
             // 
+            // errorText
+            // 
+            this.errorText.AutoSize = true;
+            this.errorText.Location = new System.Drawing.Point(102, 16);
+            this.errorText.Name = "errorText";
+            this.errorText.Size = new System.Drawing.Size(0, 15);
+            this.errorText.TabIndex = 33;
+            // 
             // ExhibitionScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(696, 422);
+            this.Controls.Add(this.errorText);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.countryText);
@@ -388,5 +398,6 @@ namespace Capstone_Project
         private System.Windows.Forms.TextBox countryText;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label errorText;
     }
 }

@@ -66,6 +66,34 @@ namespace Capstone_Project
             return list;
         }
 
+        public static List<Artwork> Search(DateTime date)
+        {
+            using DbConnection connection = new MySqlConnection(Helper.connString("MyDB"));
+            List<Artwork> list = connection.Query<Artwork>("mydb.GetArtByYear(@Year)", new { Year = date }).ToList();
+            return list;
+        }
+
+        public static List<Artwork> Search(string type, string searchTerm)
+        {
+            List<Artwork> list = new List<Artwork>();
+            if (type == Program.name)
+            {
+                using DbConnection connection = new MySqlConnection(Helper.connString("MyDB"));
+                list.AddRange(connection.Query<Artwork>("mydb.GetArtByName(@Name)", new { Name = searchTerm }).ToList());
+                return list;
+            }
+            else if (type == Program.medium)
+            {
+                using DbConnection connection = new MySqlConnection(Helper.connString("MyDB"));
+                list.AddRange(connection.Query<Artwork>("mydb.GetArtByMedium(@Med)", new { Med = searchTerm }).ToList());
+                return list;
+            }
+            else
+            {
+                return list;
+            }
+        }
+
         public static void UpdateTable(bool isNew, Artwork art)
         {
             DynamicParameters param = new DynamicParameters();
