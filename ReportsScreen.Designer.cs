@@ -107,7 +107,7 @@ namespace Capstone_Project
             // errorText
             // 
             this.errorText.AutoSize = true;
-            this.errorText.Location = new System.Drawing.Point(13, 423);
+            this.errorText.Location = new System.Drawing.Point(13, 426);
             this.errorText.Name = "errorText";
             this.errorText.Size = new System.Drawing.Size(0, 15);
             this.errorText.TabIndex = 6;
@@ -116,7 +116,7 @@ namespace Capstone_Project
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.Honeydew;
+            this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(615, 450);
             this.Controls.Add(this.errorText);
             this.Controls.Add(this.downloadButton);

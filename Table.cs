@@ -19,6 +19,29 @@ namespace Capstone_Project
         public DateTime startDate { get; set; }
         public DateTime endDate { get; set; }
         public string juror { get; set; }
+
+        public override string ToString()
+        {
+            string toString = "Name: " + name;
+            toString += "\nAddress: " + address;
+            toString += "\nCity: " + city;
+            toString += "\nState: " + state;
+            toString += "\nZip Code: " + zipCode;
+            toString += "\nCountry: " + country;
+            toString += "\nStart Date: " + startDate.ToString("d");
+            toString += "\nEnd Date: " + endDate.ToString("d");
+            toString += "\nApplication Fee: " + applicationFee.ToString();
+            toString += "\nJuror: ";
+            if (juror != "" && juror != null)
+            {
+                toString += juror;
+            }
+            else
+            {
+                toString += "None";
+            }
+            return toString;
+        }
     }
      
     public class Artwork : Table
@@ -39,9 +62,19 @@ namespace Capstone_Project
             string toString = "Title: " + title;
             toString += "\nMedium: " + medium;
             toString += "\nDimensions: " + length + " by " + width;
-            toString += "\nDate: " + createDate;
+            toString += "\nCreated: " + createDate.ToString("Y");
             toString += "\nSale details: " +saleDetails;
-            toString += "\nEdition Details: " + editionDetails;//t0-do:: finish this outline, then do one for exhibition
+            toString += "\nEdition Details: " + editionDetails;
+            toString += "\nFramed: ";
+            if (isFramed)
+            {
+                toString += "Yes";
+            }
+            else
+            {
+                toString += "No";
+            }
+            toString += "\nNotes: " + notes;
             return toString;
         }
     }

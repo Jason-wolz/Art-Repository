@@ -1,0 +1,32 @@
+Title: Somewhere I see
+Medium: Some Clay
+Dimensions: 10 inches by .5 inches
+Created: July 2021
+Sale details: Sold to a man for $300
+Edition Details: 
+Framed: No
+Notes: Piece was constructed of clay disks fused together
+
+Exhibitions this art has been to:
+Name: A Thing
+Address: 123 Place Way
+City: Bloomington
+State: Indiana
+Zip Code: 11111
+Country: US
+Start Date: 4/1/2022
+End Date: 5/1/2022
+Application Fee: 0
+Juror: None
+
+Name: A Show
+Address: 456 Place Way
+City: Somewhere
+State: Washington
+Zip Code: 11111
+Country: US
+Start Date: 7/1/2022
+End Date: 9/1/2022
+Application Fee: 50
+Juror: A Person
+

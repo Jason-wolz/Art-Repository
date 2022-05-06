@@ -16,7 +16,7 @@ namespace Capstone_Project
         int pID;
         bool newExhib = false;
         int exhibID = 0;
-        List<Exhibition> list = new List<Exhibition>();//to-do::finish photo deletion  instructor looking into problem, will get back to me on possible solutions
+        List<Exhibition> list = new List<Exhibition>();//to-do::finish photo deletion  have appointment with new instructer to find solution
         public SinglePieceScreen(Artwork artwork)
         {
             InitializeComponent();//For Future:: make screen about 50% bigger on each side, able to adapt to window size if able

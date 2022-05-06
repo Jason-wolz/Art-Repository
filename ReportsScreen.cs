@@ -69,14 +69,38 @@ namespace Capstone_Project
             }
         }
 
-        private  void downloadButton_Click(object sender, EventArgs e)//async
-        {//to-do:: implement this report, need full info about a piece dumped to text file
-         //    Artwork art = list[Program.rowID];
-         //    var temp = DataSetClass.ConnectToData(Program.simpleExhib, art.artworkID);
-         //    var exhibs = temp.Cast<Exhibition>().ToList();
-         //    temp = DataSetClass.ConnectToData(Program.photos, art.artworkID);
-         //    var photos = temp.Cast<Photos>().ToList();
-         //    StreamWriter writer = new StreamWriter("Reports\\" + art.title + "Report\\" + art.title + ".txt");
+        private async void downloadButton_Click(object sender, EventArgs e)
+        {
+            Artwork art = list[Program.rowID];
+            var temp = DataSetClass.ConnectToData(Program.simpleExhib, art.artworkID);
+            var exhibs = temp.Cast<Exhibition>().ToList();
+            temp = DataSetClass.ConnectToData(Program.photos, art.artworkID);
+            var photos = temp.Cast<Photos>().ToList();
+            string fileText = art.ToString();
+            fileText += "\n\nExhibitions this art has been to:\n";
+            foreach (Exhibition ex in exhibs)
+            {
+                fileText += ex.ToString() + "\n\n";
+            }
+            try
+            {
+                string path = @"C:\Users\jason\source\repos\Jason-wolz\Capstone-Project\Reports\" + art.title + " Report\\";
+                Directory.CreateDirectory(path);
+                await File.WriteAllTextAsync(path + art.title + ".txt", fileText);
+                for (int i = 0; i < photos.Count; i++)
+                {
+                    string newPath = path + art.title + " " + i + photos[i].url.Substring(photos[i].url.Length - 4);
+                    if (File.Exists(newPath))
+                    {
+                        File.Delete(newPath);
+                    }
+                    File.Copy(photos[i].url, newPath);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void lastYearView_CellClick(object sender, DataGridViewCellEventArgs e)

@@ -1,0 +1,32 @@
+Title: Somewhere in Time
+Medium: Paper
+Dimensions: 10 inches by 10 inches
+Created: October 2022
+Sale details: 
+Edition Details: 
+Framed: No
+Notes: 
+
+Exhibitions this art has been to:
+Name: Indiana Exhibition
+Address: 123 Sample Rd.
+City: Bloomington
+State: Indiana
+Zip Code: 47403
+Country: USA
+Start Date: 6/1/2022
+End Date: 10/1/2022
+Application Fee: 400
+Juror: Person McPhee
+
+Name: A Show
+Address: 456 Place Way
+City: Somewhere
+State: Washington
+Zip Code: 11111
+Country: US
+Start Date: 7/1/2022
+End Date: 9/1/2022
+Application Fee: 50
+Juror: A Person
+
