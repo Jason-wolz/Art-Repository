@@ -32,14 +32,7 @@ namespace Capstone_Project
             toString += "\nEnd Date: " + endDate.ToString("d");
             toString += "\nApplication Fee: " + applicationFee.ToString();
             toString += "\nJuror: ";
-            if (juror != "" && juror != null)
-            {
-                toString += juror;
-            }
-            else
-            {
-                toString += "None";
-            }
+            toString += !string.IsNullOrEmpty(juror) ? juror : "None";
             return toString;
         }
     }

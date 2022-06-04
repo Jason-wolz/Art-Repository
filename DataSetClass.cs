@@ -7,7 +7,7 @@ using Dapper;
 
 namespace Capstone_Project
 {
-    class DataSetClass
+    internal static class DataSetClass
     {
         //method for connecting to database from Youtuber IAmTimCorey  
         public static List<Table> ConnectToData(string connType, int id)
@@ -15,19 +15,19 @@ namespace Capstone_Project
             var list = new List<Table>();
             if (connType == Program.simpleExhib)
             {
-                using DbConnection connection = new MySqlConnection(Helper.connString("MyDB"));
+                using DbConnection connection = new MySqlConnection(Helper.ConnString("MyDB"));
                 list.AddRange(connection.Query<Exhibition>("mydb.GetExhibitionByArt(@ID)", new { ID = id }).ToList());
                 return list;
             }
             else if (connType == Program.photos)
             {
-                using DbConnection connection = new MySqlConnection(Helper.connString("MyDB"));
+                using DbConnection connection = new MySqlConnection(Helper.ConnString("MyDB"));
                 list.AddRange(connection.Query<Photos>("mydb.GetPhotosByArt(@ID)", new { ID = id }).ToList());
                 return list;
             }
             else if (connType == Program.simpleArt)
             {
-                using DbConnection connection = new MySqlConnection(Helper.connString("MyDB"));
+                using DbConnection connection = new MySqlConnection(Helper.ConnString("MyDB"));
                 list.AddRange(connection.Query<Artwork>("mydb.GetArtByExhibition(@ID)", new { ID = id }).ToList());
                 return list;
             }
@@ -42,13 +42,13 @@ namespace Capstone_Project
             var list = new List<Table>();
             if (connType == Program.allExhib)
             {
-                using DbConnection connection = new MySqlConnection(Helper.connString("MyDB"));
+                using DbConnection connection = new MySqlConnection(Helper.ConnString("MyDB"));
                 list.AddRange(connection.Query<Exhibition>("mydb.GetFullExhibition").ToList());
                 return list;
             }
             else if (connType == Program.allArt)
             {
-                using DbConnection connection = new MySqlConnection(Helper.connString("MyDB"));
+                using DbConnection connection = new MySqlConnection(Helper.ConnString("MyDB"));
                 list.AddRange(connection.Query<Artwork>("mydb.GetAllArtwork").ToList());
                 return list;
             }
@@ -60,7 +60,7 @@ namespace Capstone_Project
 
         public static List<Table> ConnectToData(DateTime lastYear)
         {
-            using DbConnection connection = new MySqlConnection(Helper.connString("MyDB"));
+            using DbConnection connection = new MySqlConnection(Helper.ConnString("MyDB"));
             var list = new List<Table>();
             list.AddRange(connection.Query<Artwork>("mydb.GetArtworkLastYear(@BeginDate)", new { BeginDate = lastYear }).ToList());
             return list;
@@ -68,7 +68,7 @@ namespace Capstone_Project
 
         public static List<Artwork> Search(DateTime date)
         {
-            using DbConnection connection = new MySqlConnection(Helper.connString("MyDB"));
+            using DbConnection connection = new MySqlConnection(Helper.ConnString("MyDB"));
             List<Artwork> list = connection.Query<Artwork>("mydb.GetArtByYear(@Year)", new { Year = date }).ToList();
             return list;
         }
@@ -78,13 +78,13 @@ namespace Capstone_Project
             List<Artwork> list = new List<Artwork>();
             if (type == Program.name)
             {
-                using DbConnection connection = new MySqlConnection(Helper.connString("MyDB"));
+                using DbConnection connection = new MySqlConnection(Helper.ConnString("MyDB"));
                 list.AddRange(connection.Query<Artwork>("mydb.GetArtByName(@Name)", new { Name = searchTerm }).ToList());
                 return list;
             }
             else if (type == Program.medium)
             {
-                using DbConnection connection = new MySqlConnection(Helper.connString("MyDB"));
+                using DbConnection connection = new MySqlConnection(Helper.ConnString("MyDB"));
                 list.AddRange(connection.Query<Artwork>("mydb.GetArtByMedium(@Med)", new { Med = searchTerm }).ToList());
                 return list;
             }
@@ -108,12 +108,12 @@ namespace Capstone_Project
             param.Add("@Notes", art.notes);
             if (isNew)
             {
-                using DbConnection connection = new MySqlConnection(Helper.connString("MyDB"));
+                using DbConnection connection = new MySqlConnection(Helper.ConnString("MyDB"));
                 connection.Execute("mydb.AddNewArt", param, commandType: System.Data.CommandType.StoredProcedure);
             }
             else
             {
-                using DbConnection connection = new MySqlConnection(Helper.connString("MyDB"));
+                using DbConnection connection = new MySqlConnection(Helper.ConnString("MyDB"));
                 param.Add("@Art_ID", art.artworkID);
                 connection.Execute("mydb.UpdateArtwork", param, commandType: System.Data.CommandType.StoredProcedure);
             }            
@@ -134,12 +134,12 @@ namespace Capstone_Project
             param.Add("@Juror", exhib.juror);
             if (isNew)
             {
-                using DbConnection connection = new MySqlConnection(Helper.connString("MyDB"));
+                using DbConnection connection = new MySqlConnection(Helper.ConnString("MyDB"));
                 connection.Execute("mydb.AddNewExhibition", param, commandType: System.Data.CommandType.StoredProcedure);
             }
             else
             {
-                using DbConnection connection = new MySqlConnection(Helper.connString("MyDB"));
+                using DbConnection connection = new MySqlConnection(Helper.ConnString("MyDB"));
                 param.Add("@Exhib_ID", exhib.exhibitionId);
                 connection.Execute("mydb.UpdateExhibition", param, commandType: System.Data.CommandType.StoredProcedure);
             }
@@ -152,12 +152,12 @@ namespace Capstone_Project
             param.Add("@Art_ID", inter.artworkId);
             if (isNew)
             {
-                using DbConnection connection = new MySqlConnection(Helper.connString("MyDB"));
+                using DbConnection connection = new MySqlConnection(Helper.ConnString("MyDB"));
                 connection.Execute("mydb.AddNewInterface", param, commandType: System.Data.CommandType.StoredProcedure);
             }
             else
             {
-                using DbConnection connection = new MySqlConnection(Helper.connString("MyDB"));
+                using DbConnection connection = new MySqlConnection(Helper.ConnString("MyDB"));
                 param.Add("@Inter_ID", inter.interfaceId);
                 connection.Execute("mydb.UpdateInterface", param, commandType: System.Data.CommandType.StoredProcedure);
             }
@@ -170,12 +170,12 @@ namespace Capstone_Project
             param.Add("@Url", photos.url);
             if (isNew)
             {
-                using DbConnection connection = new MySqlConnection(Helper.connString("MyDB"));
+                using DbConnection connection = new MySqlConnection(Helper.ConnString("MyDB"));
                 connection.Execute("mydb.AddNewPhoto", param, commandType: System.Data.CommandType.StoredProcedure);
             }
             else
             {
-                using DbConnection connection = new MySqlConnection(Helper.connString("MyDB"));
+                using DbConnection connection = new MySqlConnection(Helper.ConnString("MyDB"));
                 param.Add("@Photo_ID", photos.photoID);
                 connection.Execute("mydb.UpdatePhoto", param, commandType: System.Data.CommandType.StoredProcedure);
             }
@@ -185,22 +185,22 @@ namespace Capstone_Project
         {
             if (conntype == Program.simpleArt)
             {
-                using DbConnection connection = new MySqlConnection(Helper.connString("MyDB"));
+                using DbConnection connection = new MySqlConnection(Helper.ConnString("MyDB"));
                 connection.Execute("mydb.DeleteArt(@Art_ID)", new { Art_ID = id });
             }
             else if (conntype == Program.simpleExhib)
             {
-                using DbConnection connection = new MySqlConnection(Helper.connString("MyDB"));
+                using DbConnection connection = new MySqlConnection(Helper.ConnString("MyDB"));
                 connection.Execute("mydb.DeleteExhibition(@Exhib_ID)", new { Exhib_ID = id });
             }
             else if (conntype == Program.photos)
             {
-                using DbConnection connection = new MySqlConnection(Helper.connString("MyDB"));
+                using DbConnection connection = new MySqlConnection(Helper.ConnString("MyDB"));
                 connection.Execute("mydb.DeletePhoto(@Pic_ID)", new { Pic_ID = id });
             }
             else if (conntype == Program.inter)
             {
-                using DbConnection connection = new MySqlConnection(Helper.connString("MyDB"));
+                using DbConnection connection = new MySqlConnection(Helper.ConnString("MyDB"));
                 connection.Execute("mydb.DeleteInterface(@Inter_ID)", new { Inter_ID = id });
             }
         }

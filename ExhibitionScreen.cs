@@ -49,7 +49,27 @@ namespace Capstone_Project
             list = temp.Cast<Artwork>().ToList();
             artView.DataSource = list;
             artView.Columns["artworkID"].Visible = false;//for-future:: rename isFramed column to Framed
+            artView.Columns["Title"].HeaderText = "Title";
+            artView.Columns["medium"].HeaderText = "Medium";
+            artView.Columns["length"].HeaderText = "Length";
+            artView.Columns["width"].HeaderText = "Width";
+            artView.Columns["createDate"].HeaderText = "Creation Date";
             artView.Columns["isFramed"].HeaderText = "Framed";
+            artView.Columns["editionDetails"].HeaderText = "Edition Details";
+            artView.Columns["saleDetails"].HeaderText = "Sale Details";
+            artView.Columns["notes"].HeaderText = "Notes";
+        }
+
+        public bool StartBeforeEnd(Exhibition exhib)
+        {
+            if (exhib.startDate < exhib.endDate)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         private void BackButton_Click(object sender, EventArgs e)
@@ -81,8 +101,8 @@ namespace Capstone_Project
         private void SinglePieceButton_Click(object sender, EventArgs e)
         {
             Program.fromCollection = false;
-            var f = new SinglePieceScreen(list[Program.rowID]);
-            Program.rowID = exhibID - 1;
+            var f = new SinglePieceScreen(list[Program.rowId]);
+            Program.rowId = exhibID;
             this.Hide();
             f.Show();
         }
@@ -216,7 +236,7 @@ namespace Capstone_Project
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            Program.rowID = e.RowIndex;
+            Program.rowId = e.RowIndex;
             singlePieceButton.Enabled = true;
         }
 

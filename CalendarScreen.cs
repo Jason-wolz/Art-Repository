@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace Capstone_Project
@@ -19,8 +16,18 @@ namespace Capstone_Project
             list = temp.Cast<Exhibition>().ToList();
             exhibitionView.DataSource = list;
             exhibitionView.Columns["exhibitionId"].Visible = false;
+            exhibitionView.Columns["name"].HeaderText = "Name";
+            exhibitionView.Columns["address"].HeaderText = "Address";
+            exhibitionView.Columns["city"].HeaderText = "City";
+            exhibitionView.Columns["state"].HeaderText = "State";
+            exhibitionView.Columns["zipCode"].HeaderText = "Zip Code";
+            exhibitionView.Columns["country"].HeaderText = "Country";
+            exhibitionView.Columns["applicationFee"].HeaderText = "Application Fee";
+            exhibitionView.Columns["startDate"].HeaderText = "Start Date";
+            exhibitionView.Columns["endDate"].HeaderText = "End Date";
+            exhibitionView.Columns["juror"].HeaderText = "Juror";
             GetRange(list);
-            Program.rowID = 0;
+            Program.rowId = 0;
         }
 
         private void GetRange(List<Exhibition> exhibitions)
@@ -45,7 +52,7 @@ namespace Capstone_Project
 
         private void exhibitionButton_Click(object sender, EventArgs e)
         {
-            var f = new ExhibitionScreen(list[Program.rowID]);
+            var f = new ExhibitionScreen(list[Program.rowId]);
             this.Hide();
             f.Show();
         }
@@ -59,17 +66,17 @@ namespace Capstone_Project
 
         private void exhibitionView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            Program.rowID = e.RowIndex;
+            Program.rowId = e.RowIndex;
             List<Exhibition> temp = new List<Exhibition>
             {
-                list[Program.rowID]
+                list[Program.rowId]
             };
             GetRange(temp);
         }
 
         private void exhibitionView_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            exhibitionButton_Click(this, new EventArgs());
+            exhibitionButton_Click(this, EventArgs.Empty);
         }
 
         private void CalendarScreen_Load(object sender, EventArgs e)

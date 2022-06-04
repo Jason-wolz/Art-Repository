@@ -31,7 +31,7 @@ namespace Capstone_Project
             {
                 artButton.Visible = true;
                 downloadButton.Visible = true;
-                Program.rowID = 0;
+                Program.rowId = 0;
             }
             else
             {
@@ -44,7 +44,7 @@ namespace Capstone_Project
         private void artButton_Click(object sender, EventArgs e)
         {
             Program.fromCollection = true;
-            var f = new SinglePieceScreen(list[Program.rowID]);
+            var f = new SinglePieceScreen(list[Program.rowId]);
             this.Hide();
             f.Show();
         }
@@ -59,7 +59,7 @@ namespace Capstone_Project
             {
                 artButton.Visible = true;
                 downloadButton.Visible = true;
-                Program.rowID = 0;
+                Program.rowId = 0;
             }
             else
             {
@@ -71,7 +71,7 @@ namespace Capstone_Project
 
         private async void downloadButton_Click(object sender, EventArgs e)
         {
-            Artwork art = list[Program.rowID];
+            Artwork art = list[Program.rowId];
             var temp = DataSetClass.ConnectToData(Program.simpleExhib, art.artworkID);
             var exhibs = temp.Cast<Exhibition>().ToList();
             temp = DataSetClass.ConnectToData(Program.photos, art.artworkID);
@@ -80,7 +80,7 @@ namespace Capstone_Project
             fileText += "\n\nExhibitions this art has been to:\n";
             foreach (Exhibition ex in exhibs)
             {
-                fileText += ex.ToString() + "\n\n";
+                fileText += ex + "\n\n";
             }
             try
             {
@@ -105,36 +105,23 @@ namespace Capstone_Project
 
         private void lastYearView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            Program.rowID = e.RowIndex;
+            Program.rowId = e.RowIndex;
         }
 
         private void lastYearView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            artButton_Click(this, new EventArgs());
+            artButton_Click(this, EventArgs.Empty);
         }
 
         private void ReportsScreen_Load(object sender, EventArgs e)
         {
-            if (Program.nightMode)
+            BackColor = Program.nightMode ? Program.nightColor : Program.dayColor;
+            Font = Program.fontSize switch
             {
-                BackColor = Program.nightColor;
-            }
-            else
-            {
-                BackColor = Program.dayColor;
-            }
-            if (Program.fontSize == 0)
-            {
-                Font = new System.Drawing.Font("Segoe UI", 9);
-            }
-            else if (Program.fontSize == 1)
-            {
-                Font = new System.Drawing.Font("Segoe UI", 12);
-            }
-            else
-            {
-                Font = new System.Drawing.Font("Segoe UI", 14);
-            }
+                0 => new System.Drawing.Font("Segoe UI", 9),
+                1 => new System.Drawing.Font("Segoe UI", 12),
+                _ => new System.Drawing.Font("Segoe UI", 14),
+            };
         }
     }
 }

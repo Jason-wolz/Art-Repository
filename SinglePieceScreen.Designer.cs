@@ -35,6 +35,7 @@ namespace Capstone_Project
             this.label3 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.errorLabel = new System.Windows.Forms.Label();
             this.deleteExhibButton = new System.Windows.Forms.Button();
             this.newExhibButton = new System.Windows.Forms.Button();
             this.deletePhotoText = new System.Windows.Forms.Label();
@@ -61,7 +62,6 @@ namespace Capstone_Project
             this.label4 = new System.Windows.Forms.Label();
             this.soldCheckBox = new System.Windows.Forms.CheckBox();
             this.samplePicture = new System.Windows.Forms.PictureBox();
-            this.errorLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.SuspendLayout();
@@ -166,6 +166,14 @@ namespace Capstone_Project
             this.splitContainer1.SplitterDistance = 415;
             this.splitContainer1.TabIndex = 8;
             // 
+            // errorLabel
+            // 
+            this.errorLabel.AutoSize = true;
+            this.errorLabel.Location = new System.Drawing.Point(34, 13);
+            this.errorLabel.Name = "errorLabel";
+            this.errorLabel.Size = new System.Drawing.Size(0, 15);
+            this.errorLabel.TabIndex = 40;
+            // 
             // deleteExhibButton
             // 
             this.deleteExhibButton.Location = new System.Drawing.Point(34, 360);
@@ -247,6 +255,7 @@ namespace Capstone_Project
             // dateText
             // 
             this.dateText.Enabled = false;
+            this.dateText.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateText.Location = new System.Drawing.Point(318, 126);
             this.dateText.Name = "dateText";
             this.dateText.Size = new System.Drawing.Size(132, 23);
@@ -413,14 +422,6 @@ namespace Capstone_Project
             this.samplePicture.TabIndex = 8;
             this.samplePicture.TabStop = false;
             this.samplePicture.Click += new System.EventHandler(this.PictureBox_Click);
-            // 
-            // errorLabel
-            // 
-            this.errorLabel.AutoSize = true;
-            this.errorLabel.Location = new System.Drawing.Point(34, 13);
-            this.errorLabel.Name = "errorLabel";
-            this.errorLabel.Size = new System.Drawing.Size(0, 15);
-            this.errorLabel.TabIndex = 40;
             // 
             // SinglePieceScreen
             // 

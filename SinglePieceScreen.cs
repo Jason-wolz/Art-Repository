@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
@@ -10,19 +11,19 @@ namespace Capstone_Project
 {
     public partial class SinglePieceScreen : Form
     {
-        bool isEditing = false;
+        bool isEditing;
         readonly bool isNew;
-        readonly int id;
+        public int id;
         int pID;
-        bool newExhib = false;
-        int exhibID = 0;
-        List<Exhibition> list = new List<Exhibition>();//to-do::finish photo deletion  have appointment with new instructer to find solution
+        public bool newExhib;
+        public int exhibID;
+        List<Exhibition> list = new List<Exhibition>();//to-do::finish photo deletion  have appointment with new instructor to find solution
         public SinglePieceScreen(Artwork artwork)
         {
             InitializeComponent();//For Future:: make screen about 50% bigger on each side, able to adapt to window size if able
             id = artwork.artworkID;
             if (id > 0)
-            {                
+            {
                 titleText.Text = artwork.title;
                 mediumText.Text = artwork.medium;
                 lengthText.Text = artwork.length;
@@ -30,13 +31,13 @@ namespace Capstone_Project
                 dateText.Value = artwork.createDate;
                 notesText.Text = artwork.notes;
                 framedCheckBox.Checked = artwork.isFramed;
-                if (artwork.saleDetails != "" && artwork.saleDetails != null)
+                if (!string.IsNullOrEmpty(artwork.saleDetails))
                 {
                     soldCheckBox.Checked = true;
                     soldText.Text = artwork.saleDetails;
                     soldText.Enabled = false;
                 }
-                if (artwork.editionDetails != "" && artwork.editionDetails != null)
+                if (!string.IsNullOrEmpty(artwork.editionDetails))
                 {
                     editionCheckBox.Checked = true;
                     editionText.Text = artwork.editionDetails;
@@ -48,8 +49,8 @@ namespace Capstone_Project
             else
             {
                 isNew = true;
-                SaveEditButton_Click(this, new EventArgs());
-            }            
+                SaveEditButton_Click(this, EventArgs.Empty);
+            }
             var temp = DataSetClass.ConnectToData(Program.simpleExhib, artwork.artworkID);
             list = temp.Cast<Exhibition>().ToList();
             exhibitionHistory.DataSource = list;
@@ -60,6 +61,10 @@ namespace Capstone_Project
             exhibitionHistory.Columns["Country"].Visible = false;
             exhibitionHistory.Columns["ApplicationFee"].Visible = false;
             exhibitionHistory.Columns["Juror"].Visible = false;
+            exhibitionHistory.Columns["Name"].HeaderText = "Name";
+            exhibitionHistory.Columns["State"].HeaderText = "State";
+            exhibitionHistory.Columns["startDate"].HeaderText = "Start Date";
+            exhibitionHistory.Columns["endDate"].HeaderText = "End Date";
             if (list.Count > 0)
             {
                 deleteExhibButton.Visible = true;
@@ -169,13 +174,18 @@ namespace Capstone_Project
                         else
                         {
                             path = "";
-                            int picID = int.Parse(p.Name[3..]);
-                            DataSetClass.DeleteRecord(Program.photos, picID);
+                            int picId = int.Parse(p.Name[3..]);
+                            DataSetClass.DeleteRecord(Program.photos, picId);
                         }
+                        //p.Image.Dispose();
                         RefreshPictures();
                         //isEditing = false;
-                        BackButton_Click(this, new EventArgs());
+                        BackButton_Click(this, EventArgs.Empty);
                         File.Delete(path);
+                    }
+                    catch(IOException ex)
+                    {
+                        //ignore
                     }
                     catch(Exception ex)
                     {
@@ -262,8 +272,7 @@ namespace Capstone_Project
                     this.Hide();
                     f.Show();
                 }
-            }
-            
+            }            
         }
 
         private void BackButton_Click(object sender, EventArgs e)
@@ -300,55 +309,44 @@ namespace Capstone_Project
                 {
                     var temp = DataSetClass.ConnectToData(Program.allExhib);
                     list = temp.Cast<Exhibition>().ToList();
-                    var f = new ExhibitionScreen(list[Program.rowID]);
-                    this.Hide();
-                    f.Show();
+                    for (int i = 0; i < list.Count; i++)
+                    {
+                        if (list[i].exhibitionId == Program.rowId)
+                        {
+                            var f = new ExhibitionScreen(list[i]);
+                            this.Hide();
+                            f.Show();
+                        }
+                    }
                 }
             }
-            
         }
 
         private void SoldCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            if (soldCheckBox.Checked)
-            {
-                soldText.Enabled = true;
-            }
-            else
-            {
-                soldText.Enabled = false;
-            }
+            soldText.Enabled = soldCheckBox.Checked;
         }
 
         private void EditionCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            if (editionCheckBox.Checked)
-            {
-                editionText.Enabled = true;
-            }
-            else
-            {
-                editionText.Enabled = false;
-            }
+            editionText.Enabled = editionCheckBox.Checked;
         }
 
         private void deleteButton_Click(object sender, EventArgs e)
         {
             DialogResult message = MessageBox.Show("Are you sure you wish to delete this record?","Confirm Delete?", MessageBoxButtons.YesNo);
-            if (message == DialogResult.Yes)
+            if (message != DialogResult.Yes) return;
+            try
             {
-                try
-                {
-                    DataSetClass.DeleteRecord(Program.simpleArt, id);
-                }
-                catch(Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-                var f = new CollectionScreen();
-                this.Hide();
-                f.Show();
+                DataSetClass.DeleteRecord(Program.simpleArt, id);
             }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            var f = new CollectionScreen();
+            this.Hide();
+            f.Show();
         }
 
         private void SinglePieceScreen_Load(object sender, EventArgs e)
@@ -398,17 +396,9 @@ namespace Capstone_Project
                 filePath += saveFile.SafeFileName;
                 try
                 {
-                    Image image = Image.FromFile(saveFile.FileName);
-                    image.Save(filePath);
-                    Photos pic = new Photos
-                    {
-                        artworkID = id,
-                        url = filePath
-                    };
-                    DataSetClass.UpdateTable(!isNew, pic);
-                    RefreshPictures();
+                    SavePhoto(filePath, saveFile.FileName);
                 }
-                catch (Exception ex)
+                catch (MySqlException ex)
                 {
                     MessageBox.Show(ex.Message);
                 }
@@ -420,12 +410,30 @@ namespace Capstone_Project
             deletePhotoText.Text = "Delete which photo?";
         }
 
-        private void newExhibButton_Click(object sender, EventArgs e)
+        public void newExhibButton_Click(object sender, EventArgs e)
         {
             if (!newExhib)
+            
             {
+                List<int> ints = new List<int>();
+                foreach (Exhibition ex in list)
+                {
+                    ints.Add(ex.exhibitionId);
+                }
                 var temp = DataSetClass.ConnectToData(Program.allExhib);
                 list = temp.Cast<Exhibition>().ToList();
+                int i = 0;
+                while (i < list.Count)
+                {
+                    if (ints.Contains(list[i].exhibitionId))
+                    {
+                        list.RemoveAt(i);
+                    }
+                    else
+                    {
+                        i++;
+                    }
+                }
                 exhibitionHistory.DataSource = list;
                 exhibID = 0;
                 exhibText.Text = "All Exhibitions";
@@ -444,7 +452,7 @@ namespace Capstone_Project
                 {
                     DataSetClass.UpdateTable(true, inter);
                 }
-                catch(Exception ex)
+                catch(MySqlException ex)
                 {
                     MessageBox.Show(ex.Message);
                 }
@@ -460,7 +468,7 @@ namespace Capstone_Project
 
         private void exhibitionHistory_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            exhibID = e.RowIndex;
+            exhibID = list[e.RowIndex].exhibitionId;
         }
 
         private void deleteExhibButton_Click(object sender, EventArgs e)
@@ -470,10 +478,31 @@ namespace Capstone_Project
             {
                 try
                 {
-                    DataSetClass.DeleteRecord(Program.allExhib, exhibID);
+                    DataSetClass.DeleteRecord(Program.inter, exhibID);
+
                 }
                 catch (Exception ex) { MessageBox.Show(ex.Message); }
             }
+            var temp = DataSetClass.ConnectToData(Program.simpleExhib, id);
+            list = temp.Cast<Exhibition>().ToList();
+            exhibitionHistory.DataSource = list;
+        }
+
+        public void SavePhoto(string path, string name)
+        {
+            if (!File.Exists(path))
+            {
+                Image image = Image.FromFile(name);
+                image.Save(path);
+            }
+                    
+            Photos pic = new Photos
+            {
+                artworkID = id,
+                url = path
+            };
+            DataSetClass.UpdateTable(!isNew, pic);
+            RefreshPictures();
         }
     }
 }

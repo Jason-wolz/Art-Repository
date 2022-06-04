@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 
 namespace Capstone_Project
@@ -38,26 +34,13 @@ namespace Capstone_Project
 
         private void MainScreen_Load(object sender, EventArgs e)
         {
-            if (Program.nightMode)
+            BackColor = Program.nightMode ? Program.nightColor : Program.dayColor;
+            Font = Program.fontSize switch
             {
-                BackColor = Program.nightColor;
-            }
-            else
-            {
-                BackColor = Program.dayColor;
-            }
-            if (Program.fontSize == 0)
-            {
-                Font = new Font("Segoe UI", 9);
-            }
-            else if (Program.fontSize == 1)
-            {
-                Font = new Font("Segoe UI", 12);
-            }
-            else
-            {
-                Font = new Font("Segoe UI", 14);
-            }
+                0 => new Font("Segoe UI", 9),
+                1 => new Font("Segoe UI", 12),
+                _ => new Font("Segoe UI", 14)
+            };
         }
     }
 }

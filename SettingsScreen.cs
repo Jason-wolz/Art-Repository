@@ -30,7 +30,7 @@ namespace Capstone_Project
 
         private void nightCheck_CheckedChanged(object sender, EventArgs e)
         {
-            if (nightCheck.Checked == true)
+            if (nightCheck.Checked)
             {
                 Program.nightMode = true;
                 BackColor = Program.nightColor;
@@ -86,26 +86,27 @@ namespace Capstone_Project
             {
                 BackColor = Program.dayColor;
             }
-            if (Program.fontSize == 0)
+
+            switch (Program.fontSize)
             {
-                smallCheck.Checked = true;
-                nightCheck.Font = smallFont;
-                reportsButton.Font = smallFont;
-                backButton.Font = smallFont;
-            }
-            else if (Program.fontSize == 1)
-            {
-                mediumCheck.Checked = true;
-                nightCheck.Font = mediumFont;
-                reportsButton.Font = mediumFont;
-                backButton.Font = mediumFont;
-            }
-            else
-            {
-                largeCheck.Checked = true;
-                nightCheck.Font = largeFont;
-                reportsButton.Font = largeFont;
-                backButton.Font = largeFont;
+                case 0:
+                    smallCheck.Checked = true;
+                    nightCheck.Font = smallFont;
+                    reportsButton.Font = smallFont;
+                    backButton.Font = smallFont;
+                    break;
+                case 1:
+                    mediumCheck.Checked = true;
+                    nightCheck.Font = mediumFont;
+                    reportsButton.Font = mediumFont;
+                    backButton.Font = mediumFont;
+                    break;
+                default:
+                    largeCheck.Checked = true;
+                    nightCheck.Font = largeFont;
+                    reportsButton.Font = largeFont;
+                    backButton.Font = largeFont;
+                    break;
             }
         }
     }
