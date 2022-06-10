@@ -8,8 +8,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="NewFolder\**" />
     <Compile Remove="Photos\**" />
+    <EmbeddedResource Remove="NewFolder\**" />
     <EmbeddedResource Remove="Photos\**" />
+    <None Remove="NewFolder\**" />
     <None Remove="Photos\**" />
   </ItemGroup>
 
