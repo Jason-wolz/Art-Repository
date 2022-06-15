@@ -60,18 +60,6 @@ namespace Capstone_Project
             artView.Columns["notes"].HeaderText = "Notes";
         }
 
-        public bool StartBeforeEnd(Exhibition exhib)
-        {
-            if (exhib.startDate < exhib.endDate)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
         private void BackButton_Click(object sender, EventArgs e)
         {
             if (isEditing)
@@ -122,7 +110,6 @@ namespace Capstone_Project
                 startTime.Enabled = true;
                 endTime.Enabled = true;
                 juriedCheckBox.Enabled = true;
-                isEditing = !isEditing;
                 if (juriedCheckBox.Checked)
                 {
                     juriedText.Enabled = true;
@@ -152,7 +139,6 @@ namespace Capstone_Project
                 juriedCheckBox.Enabled = false;
                 juriedText.Enabled = false;
                 deleteButton.Visible = false;
-                isEditing = !isEditing;
                 Exhibition exhib = new Exhibition
                 {
                     exhibitionId = exhibID,
@@ -188,7 +174,8 @@ namespace Capstone_Project
                     this.Hide();
                     f.Show();
                 }
-            }            
+            }
+            isEditing = !isEditing;
         }
 
         private void FeeCheckBox_CheckedChanged(object sender, EventArgs e)
@@ -312,12 +299,16 @@ namespace Capstone_Project
                 errorText.Text = "Juried exceeds character limit of 45";
                 return false;
             }
-
             if (int.TryParse(feeText.Text, out _))
             {
                 errorText.Text = "App Fee not in correct format, please enter a number";
                 return false;
             }
+            if (startTime.Value > endTime.Value)
+            {
+                errorText.Text = "Start Date must be before End Date";
+                return false;
+            }            
             return true;            
         }
     }
