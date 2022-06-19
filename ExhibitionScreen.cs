@@ -329,7 +329,7 @@ namespace Capstone_Project
                 errorText.Text = "Juried exceeds character limit of 45.";
                 return false;
             }
-            if (int.TryParse(feeText.Text, out _))
+            if (!int.TryParse(feeText.Text, out _))
             {
                 errorText.Text = "App fee not in correct format, please enter a number.";
                 return false;
