@@ -406,7 +406,7 @@ namespace Capstone_Project
                 Filter = "JPeg Image|*.jpg|Tiff Image|*.tif",
                 Title = "Save an Image File"
             };
-            string filePath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + "Capstone\\Photos\\";
+            string filePath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + "\\Capstone\\Photos\\";
             saveFile.ShowDialog();
             if (saveFile.FileName != "")
             {

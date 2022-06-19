@@ -266,47 +266,77 @@ namespace Capstone_Project
         {
             if (nameText.Text.Length > 45)
             {
-                errorText.Text = "Name exceeds character limit of 45";
+                errorText.Text = "Name exceeds character limit of 45.";
+                return false;
+            }
+            else if (nameText.Text.Length == 0)
+            {
+                errorText.Text = "Name is a required field. Please enter a name.";
                 return false;
             }
             if (addressText.Text.Length > 45)
             {
-                errorText.Text = "Address exceeds character limit of 45";
+                errorText.Text = "Address exceeds character limit of 45.";
+                return false;
+            }
+            else if (addressText.Text.Length == 0)
+            {
+                errorText.Text = "Address is a required field. Please enter an address.";
                 return false;
             }
             if (cityText.Text.Length > 45)
             {
-                errorText.Text = "City exceeds character limit of 45";
+                errorText.Text = "City exceeds character limit of 45.";
+                return false;
+            }
+            else if (cityText.Text.Length == 0)
+            {
+                errorText.Text = "City is a required field. Please enter a city.";
                 return false;
             }
             if (stateText.Text.Length > 45)
             {
-                errorText.Text = "State exceeds character limit of 45";
+                errorText.Text = "State exceeds character limit of 45.";
+                return false;
+            }
+            else if (stateText.Text.Length == 0)
+            {
+                errorText.Text = "State is a required field. Please enter a state.";
                 return false;
             }
             if (zipText.Text.Length > 10)
             {
-                errorText.Text = "Zip Code exceeds character limit of 10";
+                errorText.Text = "Zip Code exceeds character limit of 10.";
+                return false;
+            }
+            else if (zipText.Text.Length == 0)
+            {
+                errorText.Text = "Zip code is a required field. Please enter a zip code.";
                 return false;
             }
             if (countryText.Text.Length > 45)
             {
-                errorText.Text = "Country exceeds character limit of 45";
+                errorText.Text = "Country exceeds character limit of 45.";
+                return false;
+            }
+            else if (countryText.Text.Length == 0)
+            {
+                errorText.Text = "Country is a required field. Please enter a country.";
                 return false;
             }
             if (juriedText.Text.Length > 45)
             {
-                errorText.Text = "Juried exceeds character limit of 45";
+                errorText.Text = "Juried exceeds character limit of 45.";
                 return false;
             }
             if (int.TryParse(feeText.Text, out _))
             {
-                errorText.Text = "App Fee not in correct format, please enter a number";
+                errorText.Text = "App fee not in correct format, please enter a number.";
                 return false;
             }
             if (startTime.Value > endTime.Value)
             {
-                errorText.Text = "Start Date must be before End Date";
+                errorText.Text = "Start date must be before end date.";
                 return false;
             }            
             return true;            
