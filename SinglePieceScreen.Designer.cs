@@ -62,6 +62,9 @@ namespace Capstone_Project
             this.label4 = new System.Windows.Forms.Label();
             this.soldCheckBox = new System.Windows.Forms.CheckBox();
             this.samplePicture = new System.Windows.Forms.PictureBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.SuspendLayout();
@@ -126,6 +129,9 @@ namespace Capstone_Project
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.label12);
+            this.splitContainer1.Panel1.Controls.Add(this.label11);
+            this.splitContainer1.Panel1.Controls.Add(this.label5);
             this.splitContainer1.Panel1.Controls.Add(this.errorLabel);
             this.splitContainer1.Panel1.Controls.Add(this.deleteExhibButton);
             this.splitContainer1.Panel1.Controls.Add(this.newExhibButton);
@@ -423,6 +429,36 @@ namespace Capstone_Project
             this.samplePicture.TabStop = false;
             this.samplePicture.Click += new System.EventHandler(this.PictureBox_Click);
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.ForeColor = System.Drawing.Color.Red;
+            this.label5.Location = new System.Drawing.Point(242, 42);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(12, 15);
+            this.label5.TabIndex = 41;
+            this.label5.Text = "*";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.ForeColor = System.Drawing.Color.Red;
+            this.label11.Location = new System.Drawing.Point(232, 71);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(12, 15);
+            this.label11.TabIndex = 42;
+            this.label11.Text = "*";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.ForeColor = System.Drawing.Color.Red;
+            this.label12.Location = new System.Drawing.Point(226, 100);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(12, 15);
+            this.label12.TabIndex = 43;
+            this.label12.Text = "*";
+            // 
             // SinglePieceScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -477,5 +513,8 @@ namespace Capstone_Project
         private System.Windows.Forms.Button newExhibButton;
         private System.Windows.Forms.Button deleteExhibButton;
         private System.Windows.Forms.Label errorLabel;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label5;
     }
 }

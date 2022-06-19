@@ -17,7 +17,7 @@ namespace Capstone_Project
         int pID;
         public bool newExhib;
         public int exhibID;
-        List<Exhibition> list = new List<Exhibition>();//to-do::finish photo deletion  have appointment with new instructor to find solution
+        List<Exhibition> list = new List<Exhibition>();
         public SinglePieceScreen(Artwork artwork)
         {
             InitializeComponent();//For Future:: make screen about 50% bigger on each side, able to adapt to window size if able
@@ -115,41 +115,58 @@ namespace Capstone_Project
             }
         }
 
-        private bool IsValid()
+        private bool IsValid()// check for empty fields
         {
             if (titleText.Text.Length > 45)
             {
-                errorLabel.Text = "Title exceeds character limit of 45";
+                errorLabel.Text = "Title exceeds character limit of 45.";
+                return false;
+            }
+            else if(titleText.Text.Length == 0)
+            {
+                errorLabel.Text = "Title is a required field. Please enter a title.";
                 return false;
             }
             if (mediumText.Text.Length > 45)
             {
-                errorLabel.Text = "Medium exceeds character limit of 45";
+                errorLabel.Text = "Medium exceeds character limit of 45.";
                 return false;
+            }
+            else if (mediumText.Text.Length == 0)
+            {
+                errorLabel.Text = "Medium is a required field. Please enter a medium.";
             }
             if (lengthText.Text.Length > 10)
             {
-                errorLabel.Text = "Length exceeds character limit of 10";
+                errorLabel.Text = "Length exceeds character limit of 10.";
                 return false;
+            }
+            else if (lengthText.Text.Length == 0)
+            {
+                errorLabel.Text = "Length is a required field. Please enter a length.";
             }
             if (widthText.Text.Length > 10)
             {
-                errorLabel.Text = "Width exceeds character limit of 10";
+                errorLabel.Text = "Width exceeds character limit of 10.";
                 return false;
+            }
+            else if (widthText.Text.Length == 0)
+            {
+                errorLabel.Text = "Width is a required field. Please enter a width.";
             }
             if (soldText.Text.Length > 100)
             {
-                errorLabel.Text = "Sold exceeds character limit of 100";
+                errorLabel.Text = "Sold exceeds character limit of 100.";
                 return false;
             }
             if (editionText.Text.Length > 45)
             {
-                errorLabel.Text = "Edition exceeds character limit of 45";
+                errorLabel.Text = "Edition exceeds character limit of 45.";
                 return false;
             }
             if (notesText.Text.Length > 200)
             {
-                errorLabel.Text = "Notes exceed character limit of 200";
+                errorLabel.Text = "Notes exceed character limit of 200.";
                 return false;
             }
             return true;
@@ -389,7 +406,7 @@ namespace Capstone_Project
                 Filter = "JPeg Image|*.jpg|Tiff Image|*.tif",
                 Title = "Save an Image File"
             };
-            string filePath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + "Capstone-Project\\Photos\\";
+            string filePath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + "Capstone\\Photos\\";
             saveFile.ShowDialog();
             if (saveFile.FileName != "")
             {

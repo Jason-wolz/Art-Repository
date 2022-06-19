@@ -6,7 +6,7 @@ using System.Windows.Forms;
 
 namespace Capstone_Project
 {
-    public partial class ExhibitionScreen : Form
+    public partial class ExhibitionScreen : Form//check required fields
     {
         readonly bool isNew;
         readonly int exhibID;
@@ -48,7 +48,7 @@ namespace Capstone_Project
             var temp = DataSetClass.ConnectToData(Program.simpleArt, exhibition.exhibitionId);
             list = temp.Cast<Artwork>().ToList();
             artView.DataSource = list;
-            artView.Columns["artworkID"].Visible = false;//for-future:: rename isFramed column to Framed
+            artView.Columns["artworkID"].Visible = false;
             artView.Columns["Title"].HeaderText = "Title";
             artView.Columns["medium"].HeaderText = "Medium";
             artView.Columns["length"].HeaderText = "Length";

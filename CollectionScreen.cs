@@ -25,8 +25,15 @@ namespace Capstone_Project
             artDataGrid.Columns["editionDetails"].HeaderText = "Edition Details";
             artDataGrid.Columns["saleDetails"].HeaderText = "Sale Details";
             artDataGrid.Columns["notes"].HeaderText = "Notes";
-            Program.rowId = arts[0].artworkID;
-            SetPhoto(Program.rowId);
+            if (arts.Count > 0)
+            {
+                Program.rowId = arts[0].artworkID;
+                SetPhoto(Program.rowId);
+            }
+            else
+            {
+                singlePieceButton.Enabled = false;
+            }
         }
 
         private void SetPhoto(int id)

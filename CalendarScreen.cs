@@ -28,6 +28,10 @@ namespace Capstone_Project
             exhibitionView.Columns["juror"].HeaderText = "Juror";
             GetRange(list);
             Program.rowId = 0;
+            if (list.Count == 0)
+            {
+                exhibitionButton.Enabled = false;
+            }
         }
 
         private void GetRange(List<Exhibition> exhibitions)

@@ -6,7 +6,7 @@ namespace Capstone_Project
 {
     static class Program//for-Future:: add field "currentLocation" to artwork table
     {                                           
-        public static bool nightMode = false;//to-do:: just discovered a bug when going to exhibitionScreen from the singlePieceScreen my be off by one bug
+        public static bool nightMode = false;
         public static int fontSize = 0;         
         public static bool fromCollection;        
         public static int rowId;               
@@ -30,6 +30,7 @@ namespace Capstone_Project
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            DataSetClass.CreateDatabase();
             Application.Run(new MainScreen());
         }
     }
